@@ -6,6 +6,7 @@ const Login = () => {
 
  const [username, setUsername] = useState("");
  const [password,setPassword] = useState("");
+ const [user, setUser] = useState();
  const handleLogin = async () => {
     try {
       const response = await axios.post(
@@ -20,7 +21,7 @@ const Login = () => {
           },
         }
       );
-  
+      setUser(response.data);
       // Handle successful login response (e.g., store tokens, redirect, etc.)
       console.log('User logged in successfully', response.data);
     } catch (error) {
@@ -28,7 +29,35 @@ const Login = () => {
       console.error('Login failed', error.response.data);
     }
   };
-
+  const handleLogout = async () => {
+    try {
+      if (!user) {
+        console.error('User not logged in');
+        return;
+      }
+  
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/logout",
+        {
+          user_id: user._id,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      // Handle successful logout response (e.g., clear user state)
+      console.log('User logged out successfully', response.data);
+  
+      // Clear user state
+      setUser(null);
+    } catch (error) {
+      // Handle logout error (e.g., display error message to the user)
+      console.error('Logout failed', error.response.data);
+    }
+  };
   return (
     <div className='flex w-full h-full justify-center items-center'>
       <div className='flex flex-col h-[80%] w-[40%] bg-white p-12'>
@@ -44,6 +73,7 @@ const Login = () => {
         <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} placeholder="input password" className='mt-2 h-12 text-textboxtext-0 ring-[0.5px] border-none ring-ring-0 bg-textbox-0 bg-opacity-20' placeholde="password" />
         <div className='m-auto'></div>
          <button onClick={handleLogin} className='h-12 bg-accent-0 danger text-white text-lg font-semibold rounded-md' >Log in</button>
+         <button onClick={handleLogout} className='h-12 bg-accent-0 danger text-white text-lg font-semibold rounded-md mt-2' >Log Out</button>
       </div>
     </div>
   )
