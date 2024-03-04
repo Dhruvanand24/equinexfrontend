@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const Main = () => {
   return (
-      <div className='flex w-full'>
+      <div className='flex w-full font-roboto'>
     
         <Outlet />
       </div>

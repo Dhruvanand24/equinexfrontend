@@ -6,18 +6,22 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto"]
+      },
+
       colors: {
-        accent: "#7758FF",
-        text: "#595959",
-        white: "#F0F0F0",
-        background: "#EDF1FA",
-        bluedark: "#539BFF",
-        bluelight: "#49BEFF",
-        textbox: "#BACFFF",
-        black: "#1A202C",
-        heading: "#4A5568",
-        textboxtext: "#9299A4",
-        sidebar: "#718096"
+        accent: ["#7758FF"],
+        text: ["#595959"],
+        white: ["#F0F0F0"],
+        background: ["#EDF1FA"],
+        bluedark: ["#539BFF"],
+        bluelight: ["#49BEFF"],
+        textbox: ["#BACFFF"],
+        black: ["#1A202C"],
+        heading: ["#4A5568"],
+        textboxtext: ["#9299A4"],
+        sidebar: ["#718096"]
       }
     },
   },
