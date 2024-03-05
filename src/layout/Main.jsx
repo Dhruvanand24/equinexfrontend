@@ -9,9 +9,9 @@ const Main = () => {
   return (
       <div className='bg-background-0 h-screen font-roboto flex'>
         <Sidebar />
-        <div className='flex flex-col w-full'>
+        <div className='flex flex-col w-full bg-background-0 pl-5'>
           <Navbar />
-        <Outlet />
+          <Outlet />
         </div>
       </div>
     

@@ -7,7 +7,7 @@ const Sidebar = () => {
     setSearchTerm(event.target.value);
   };
   return (
-    <div className="flex flex-col h-screen w-[270px] bg-white mr-5">
+    <div className="flex flex-col h-screen w-[270px] bg-white">
       <div className="flex w-full bg-accent-0 h-[65px] items-center px-4">
         <img className="h-[39px] w-[38px]" src="/equinexlogo.png" alt="" />
         <h1 className="text-white text-[24px] ml-2">Equinex</h1>
