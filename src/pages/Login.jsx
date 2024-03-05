@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Input ,Button } from 'antd'
 import axios from 'axios';
+import AuthContext from "../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+
+  const navigate = useNavigate(); 
+  const { setIsAuth } = useContext(AuthContext);
  const [username, setUsername] = useState("");
  const [password,setPassword] = useState("");
  const [user, setUser] = useState();
@@ -21,7 +26,9 @@ const Login = () => {
           },
         }
       );
-      setUser(response.data);
+     
+     
+       navigate("/orderlist");
       // Handle successful login response (e.g., store tokens, redirect, etc.)
       console.log('User logged in successfully', response.data);
     } catch (error) {
@@ -59,7 +66,7 @@ const Login = () => {
     }
   };
   return (
-    <div className='flex w-full h-full justify-center items-center'>
+    <div className='flex w-full h-screen justify-center items-center bg-background-0'>
       <div className='flex flex-col h-[80%] w-[40%] bg-white p-12'>
         <h1 className='text-accent-0 font-[400] text-[54px]'>Welcome! <span className='text-text-0 font-normal text-[18px]'>to Equinex</span></h1>
         <hr />
