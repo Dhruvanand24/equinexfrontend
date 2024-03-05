@@ -7,9 +7,9 @@ import Navbar from '../components/Navbar';
 
 const Main = () => {
   return (
-      <div className='bg-background-0 h-screen font-roboto flex gap-5'>
+      <div className='bg-background-0 h-screen font-roboto flex'>
         <Sidebar />
-        <div className='flex flex-col w-full gap'>
+        <div className='flex flex-col w-full'>
           <Navbar />
         <Outlet />
         </div>
