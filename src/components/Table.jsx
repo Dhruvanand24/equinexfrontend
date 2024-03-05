@@ -3,7 +3,7 @@ import React from 'react'
 const Table = () => {
   return (
     <div>
-      <div id="tablehead" className='w-full flex text-[#595959] font-semibold text-sm py-2 border-b-[1px] border-[#D9D9D9]'>
+      <div id="tablehead" className='w-full flex text-[#595959] font-semibold text-sm py-2 border-b-[1px] border-[#D9D9D9] overflow-x-scroll'>
         <div className='w-10 flex text-wrap items-center justify-start'>S No.</div>
         <div className='w-20 flex text-wrap items-center justify-start'>Order Id</div>
         <div className='w-24 flex text-wrap items-center justify-start'>DOO</div>

@@ -1,6 +1,68 @@
 import React from 'react'
-import Table from '../components/Table'
+import { Table } from 'antd'
+import SkeletonNode from 'antd/es/skeleton/Node';
 const OrderList = () => {
+ 
+  
+  const columns = [
+    {
+      title: 'S.no',
+      dataIndex: 'S.no',
+      key: 'S.no',
+      fixed: 'left',
+    },
+    {
+      title: 'Order Id',
+      dataIndex: 'Order Id',
+      key: 'Order Id',
+    },
+    {
+      title: 'DOO',
+      dataIndex: 'DOO',
+      key: 'DOO',
+    },
+    {
+      title: 'Buyer',
+      dataIndex: 'Buyer',
+      key: 'Buyer',
+    },
+    {
+      title: 'Details',
+      dataIndex: 'Details',
+      key: 'Details',
+    },
+    {
+      title: 'Deal Amount',
+      dataIndex: 'Deal Amount',
+      key: 'Deal Amount',
+    },
+    {
+      title: 'Amount Paid',
+      dataIndex: 'Amount Paid',
+      key: 'Amount Paid',
+    },
+    {
+      title: 'Amount Due',
+      dataIndex: 'Amount Due',
+      key: 'Amount Due',
+    },
+    {
+      title: 'Dead line',
+      dataIndex: 'Dead line',
+      key: 'Dead line',
+    },
+    {
+      title: 'Delivery Date',
+      dataIndex: 'Delivery Date',
+      key: 'Delivery Date',
+    },
+    {
+      title: 'Recipt',
+      dataIndex: 'Recipt',
+      key: 'Recipt',
+      fixed: 'right',
+    },
+  ];
   return (
     <div className='bg-white p-4 w-full flex flex-col justify-start items-start'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Orders</p>
@@ -38,7 +100,7 @@ const OrderList = () => {
        <button className='px-4 py-2 bg-blue-500 rounded-[5px] text-white abs relative  left-[85%] hover:bg-blue-600'>+ Create Order</button>
        
        <hr className='bg-blue-500 h-1 mt-4'/>
-       <Table/>
+       <Table  columns={columns} scroll={{ x: 1000, y: 300 }}/>;
       </div>
     </div>
   )
