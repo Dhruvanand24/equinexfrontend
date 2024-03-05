@@ -11,6 +11,7 @@ export default {
       },
 
       colors: {
+        primary: ["#7758FF"],
         accent: ["#7758FF"],
         text: ["#595959"],
         offwhite: ["#F0F0F0"],

@@ -1,9 +1,25 @@
-import React from 'react'
-import { Table } from 'antd'
-import SkeletonNode from 'antd/es/skeleton/Node';
+import React, { useState } from 'react'
+import { Table, Modal, Button } from 'antd'
 const OrderList = () => {
- 
-  
+
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('Content of the modal');
+  const handleOk = () => {
+    setModalText('The modal will be closed after two seconds');
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setOpen(false);
+  };
   const columns = [
     {
       title: 'S.no',
@@ -97,11 +113,31 @@ const OrderList = () => {
             </div>
 
        </div>
-       <button className='px-4 py-2 bg-blue-500 rounded-[5px] text-white abs relative  left-[85%] hover:bg-blue-600'>+ Create Order</button>
-       
+      
+      
+       <button onClick={showModal} className=' px-4 py-2 bg-blue-500 rounded-[5px] text-white abs relative  left-[85%] hover:bg-blue-600'>+ Create Order</button>
+     
+       <Modal
+        title="Title"
+        open={open}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <form action="">
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
+          <button>ok</button>
+        </form>
+      </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
        <Table  columns={columns} scroll={{ x: 1000, y: 300 }}/>;
       </div>
+     
     </div>
   )
 }
