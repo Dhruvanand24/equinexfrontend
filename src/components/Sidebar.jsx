@@ -13,7 +13,7 @@ const Sidebar = () => {
         <h1 className="text-white text-[24px] ml-2">Equinex</h1>
       </div>
       <div className="flex px-4 mt-8">
-        <div className="flex w-full px-4 p-3 rounded-lg shadow-md bg-background-0 items-center">
+        <div className="flex w-full px-4 p-3 rounded-lg shadow-md bg-background-0 items-center ring-1 ring-slate-400">
           <img src="/search.png" alt="" />
           <input
             type="text"
