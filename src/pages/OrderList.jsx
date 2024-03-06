@@ -359,8 +359,8 @@ const OrderList = () => {
         </form>
       </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
-       <div className='h-[300px] relative'>
-       <Table dataSource={dataSource}  columns={columns} scroll={{ x: 1000, y: 400 }} className='absolute' />;
+       <div className='max-w-full'>
+       <Table dataSource={dataSource}  columns={columns} scroll={{x:500}} />
        </div>
       </div>
      
