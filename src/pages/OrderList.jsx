@@ -91,8 +91,8 @@ const OrderList = () => {
     <div className='bg-white p-4 w-full flex flex-col justify-start items-start'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Orders</p>
 
-      <div className='w-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2 relative'>
-       <div className='filtersection flex gap-[50px] p-4'>
+      <div className='w-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2 relative h-fit'>
+       <div className='filtersection flex flex-wrap gap-[50px] p-4'>
 
             <div className=' flex flex-col gap-1'>
                 <p className='text-[#718096] text-sm'>PR No.</p>
@@ -143,7 +143,9 @@ const OrderList = () => {
         </form>
       </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
-       <Table  columns={columns} scroll={{ x: 1000, y: 300 }}/>;
+       <div className='h-fit  relative' >
+        <Table  columns={columns} scroll={{ x: 1000, y: 300 }} className='absolute '/>
+       </div>
       </div>
      
     </div>
