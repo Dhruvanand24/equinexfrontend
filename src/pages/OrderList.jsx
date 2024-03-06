@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Modal, Button } from 'antd'
+import Modala from '../components/Modal.jsx';
 
 
 
@@ -338,26 +339,11 @@ const OrderList = () => {
       
      <div className='flex w-full px-4'>
       <div className='m-auto'></div>
-      <button onClick={showModal} className=' px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600'>+ Create Order</button>
+      <button className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600" onClick={()=>document.getElementById('my_modal_5').showModal()}>+ Create Order</button>
+       <Modala />
      </div>
      
-       <Modal
-        title="Title"
-        open={open}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
-        <form action="">
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <input className=' w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500' type="text" placeholder='Purchase Order No.'/>
-          <button>ok</button>
-        </form>
-      </Modal>
+       
        <hr className='bg-blue-500 h-1 mt-4'/>
        <div className='max-w-full'>
        <Table dataSource={dataSource}  columns={columns} scroll={{x:500}} />
