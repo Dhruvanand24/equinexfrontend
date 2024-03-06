@@ -25,39 +25,39 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="flex flex-col px-8 mt-8 text-sidebar-0 text-[16px] font-[500] gap-4">
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Dashboard</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Inventory</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Sales & purchase</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Partners</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Transport</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Production</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Expenses</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Reports</h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Integration</h1>
         </div>
