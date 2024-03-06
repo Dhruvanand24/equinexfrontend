@@ -1,8 +1,16 @@
-import React, { useState } from "react";
-import { Table, Modal, Button } from "antd";
-import Modala from "../components/modals/Modal.jsx";
+import React, { useState } from 'react'
+import { Table, Modal, Button } from 'antd'
+import CreateOrder from '../components/modals/CreateOrder.modal.jsx';
+
+
+
+
+
 
 const OrderList = () => {
+
+ 
+
   const dataSource = [
     {
       key: "1",
@@ -328,28 +336,22 @@ const OrderList = () => {
                 alt=""
               />
             </div>
-          </div>
-        </div>
 
-        <div className="flex w-full px-4">
-          <div className="m-auto"></div>
-          <button
-            className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600"
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-          >
-            + Create Order
-          </button>
-          <Modala />
-        </div>
-
-        <hr className="bg-blue-500 h-1 mt-4" />
-        <div className="max-w-full">
-          <Table
-            dataSource={dataSource}
-            columns={columns}
-            scroll={{ x: 500 }}
-          />
-        </div>
+       </div>
+      
+      
+     <div className='flex w-full px-4'>
+      <div className='m-auto'></div>
+      <button className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600" onClick={()=>document.getElementById('create_new_order_modal').showModal()}>+ Create Order</button>
+       {/* <Modala /> */}
+       <CreateOrder />
+     </div>
+     
+       
+       <hr className='bg-blue-500 h-1 mt-4'/>
+       <div className='max-w-full'>
+       <Table dataSource={dataSource}  columns={columns} scroll={{x:500}} />
+       </div>
       </div>
     </div>
   );
