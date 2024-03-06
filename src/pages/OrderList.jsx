@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Modal, Button } from 'antd'
-import Modala from '../components/modals/Modal';
+import CreateOrder from '../components/modals/CreateOrder.modal.jsx';
 
 
 
@@ -11,24 +11,6 @@ const OrderList = () => {
 
  
 
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState('Content of the modal');
-  const handleOk = () => {
-    setModalText('The modal will be closed after two seconds');
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-  const showModal = () => {
-    setOpen(true);
-  };
-  const handleCancel = () => {
-    console.log('Clicked cancel button');
-    setOpen(false);
-  };
   const dataSource = [
     {
       key: '1',
@@ -339,8 +321,9 @@ const OrderList = () => {
       
      <div className='flex w-full px-4'>
       <div className='m-auto'></div>
-      <button className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600" onClick={()=>document.getElementById('my_modal_5').showModal()}>+ Create Order</button>
-       <Modala />
+      <button className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600" onClick={()=>document.getElementById('create_new_order_modal').showModal()}>+ Create Order</button>
+       {/* <Modala /> */}
+       <CreateOrder />
      </div>
      
        
