@@ -304,7 +304,7 @@ const OrderList = () => {
     <div className='bg-white p-4 w-full flex flex-col justify-start items-start h-full'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Orders</p>
 
-      <div className='w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2 relative'>
+      <div className='w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2'>
        <div className='filtersection flex flex-wrap gap-[50px] p-4'>
 
             <div className=' flex flex-col gap-1'>
@@ -336,7 +336,10 @@ const OrderList = () => {
        </div>
       
       
-       <button onClick={showModal} className=' px-4 py-2 bg-blue-500 rounded-[5px] text-white abs relative  left-[85%] hover:bg-blue-600'>+ Create Order</button>
+     <div className='flex w-full px-4'>
+      <div className='m-auto'></div>
+      <button onClick={showModal} className=' px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600'>+ Create Order</button>
+     </div>
      
        <Modal
         title="Title"
@@ -356,7 +359,7 @@ const OrderList = () => {
         </form>
       </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
-       <div className='h-fit relative'>
+       <div className='h-[300px] relative'>
        <Table dataSource={dataSource}  columns={columns} scroll={{ x: 1000, y: 400 }} className='absolute' />;
        </div>
       </div>
