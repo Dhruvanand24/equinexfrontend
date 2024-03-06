@@ -63,14 +63,14 @@ const CreateOrder = () => {
 
   return (
     <dialog id="create_new_order_modal" className="modal backdrop-blur-sm">
-      <div className="modal-box w-3/5 max-w-5xl flex flex-col items-center justify-center rounded-lg">
+      <div className="modal-box w-3/5 max-w-5xl flex flex-col items-center justify-center rounded-lg ">
         <div className="modal-action">
           <form onSubmit={handleSubmit(onSubmit)} className="" method="dialog">
             <h3 className="font-bold text-[18px] text-heading-0">
               Create New Order
             </h3>
             <hr />
-            <div className="flex flex-wrap gap-x-10 gap-y-7 mt-2 w-full items-center justify-start text-text-0 text-[18px]">
+            <div className="flex flex-wrap gap-x-10 gap-y-7 mt-2 w-full items-center justify-start text-text-0 text-[18px] relative">
               <div className=" flex flex-col gap-1">
                 <p className="text-[14px]">Order By</p>
                 <div className="w-fit overflow-hidden">
@@ -107,19 +107,7 @@ const CreateOrder = () => {
                 </div>
               </div>
 
-              <div className=" flex flex-col gap-1">
-                <p className=" text-sm">Select Process</p>
-                {/* <select multiple className="w-fit overflow-hidden relative h-fit">
-                  {AllBuyers.map((ele) => (
-                    <option key={ele.name} className="mb-2">
-                      <label className="flex items-center">
-                        <input type="checkbox" className="mr-2" placeholder={ele.name} />
-                        {ele.name}
-                      </label>
-                    </option>
-                  ))}
-                </select> */}
-              </div>
+              
 
               <div className=" flex flex-col gap-1 items-start justify-start">
                 <p className=" text-sm">Deadline</p>
@@ -132,7 +120,30 @@ const CreateOrder = () => {
                   {/* <DatePicker className='z-50'/> */}
                 </div>
               </div>
+              <div className="">
+                
+                <div className="dropdown w-[256px]">
+                  <div tabIndex={0} role="button" className="btn btn-ghost ">
+                    <div className="">Select process</div>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 absolute"
+                  >
+                    {AllBuyers.map((ele) => (
+                      <div className="">
+                        <label htmlFor="po">
+                          <input name="po" type="checkbox" />
+                          {ele.name}
+                        </label>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
+
+         
 
             <button
               htmlFor="create_new_order_modal"
