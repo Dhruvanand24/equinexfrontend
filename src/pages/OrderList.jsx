@@ -28,6 +28,219 @@ const OrderList = () => {
     console.log('Clicked cancel button');
     setOpen(false);
   };
+  const dataSource = [
+    {
+      key: '1',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '2',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '3',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '4',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '5',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '6',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '7',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '8',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '9',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '10',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '11',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '12',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '13',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '14',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    {
+      key: '15',
+      "S.no": '1',
+      "Order Id": 12,
+      DOO: '10 Downing Street',
+      Buyer: 'RAMLakhan',
+      Details: "hello",
+      "Deal Amount": 12321,
+      "Amount Paid": 123123,
+      "Amount Due": 1223,
+      Deadline: 21434,
+      "Delivery Date": 21323,
+      "Receipt": 12312
+    },
+    
+  ];
   const columns = [
     {
       title: 'S.no',
@@ -88,10 +301,10 @@ const OrderList = () => {
     },
   ];
   return (
-    <div className='bg-white p-4 w-full flex flex-col justify-start items-start'>
+    <div className='bg-white p-4 w-full flex flex-col justify-start items-start h-full'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Orders</p>
 
-      <div className='w-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2 relative h-fit'>
+      <div className='w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2 relative'>
        <div className='filtersection flex flex-wrap gap-[50px] p-4'>
 
             <div className=' flex flex-col gap-1'>
@@ -144,7 +357,7 @@ const OrderList = () => {
       </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
        <div className='h-fit relative'>
-       <Table  columns={columns} scroll={{ x: 1000, y: 300 }} className='absolute' />;
+       <Table dataSource={dataSource}  columns={columns} scroll={{ x: 1000, y: 400 }} className='absolute' />;
        </div>
       </div>
      
