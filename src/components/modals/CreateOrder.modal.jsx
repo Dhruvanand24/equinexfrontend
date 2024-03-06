@@ -59,18 +59,18 @@ const CreateOrder = () => {
     }
   };
 
-  const AllBuyers = [{ name: "kaif" }, { name: "Dhruv" }, { name: "Anjali" }];
+  const AllBuyers = [{ name: "kaif" }, { name: "Dhruv" }, { name: "Anjali" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" },];
 
   return (
     <dialog id="create_new_order_modal" className="modal backdrop-blur-sm">
-      <div className="modal-box w-3/5 max-w-5xl flex flex-col items-center justify-center rounded-lg ">
-        <div className="modal-action">
-          <form onSubmit={handleSubmit(onSubmit)} className="" method="dialog">
-            <h3 className="font-bold text-[18px] text-heading-0">
+      <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
+        <div className="modal-action h-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full" method="dialog">
+            <h3 className="font-bold text-[18px] text-heading-0 mb-4">
               Create New Order
             </h3>
             <hr />
-            <div className="flex flex-wrap gap-x-10 gap-y-7 mt-2 w-full items-center justify-start text-text-0 text-[18px] relative">
+            <div className="flex flex-wrap gap-x-10 gap-y-7 mt-4 w-full items-center justify-start text-text-0 text-[18px] relative">
               <div className=" flex flex-col gap-1">
                 <p className="text-[14px]">Order By</p>
                 <div className="w-fit overflow-hidden">
@@ -120,27 +120,29 @@ const CreateOrder = () => {
                   {/* <DatePicker className='z-50'/> */}
                 </div>
               </div>
-              <div className="">
-                
-                <div className="dropdown w-[256px]">
-                  <div tabIndex={0} role="button" className="btn btn-ghost ">
-                    <div className="">Select process</div>
-                  </div>
+              <div className=" flex flex-col gap-1 items-start justify-start">
+                <p className=" text-sm">Select Process</p>
+                <div className="w-fit ">
+                <div className="dropdown w-[256px] text-[14px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500">
+                <p tabIndex={0} role="button" className=" text-sm">select</p>
                   <ul
                     tabIndex={0}
-                    className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 absolute"
+                    className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 h-[100px] overflow-auto"
                   >
                     {AllBuyers.map((ele) => (
-                      <div className="">
-                        <label htmlFor="po">
+                      <div className="flex gap-2">
+                        
                           <input name="po" type="checkbox" />
-                          {ele.name}
-                        </label>
+                          
+                          <p className="">{ele.name}</p>
                       </div>
                     ))}
                   </ul>
                 </div>
+                  {/* <DatePicker className='z-50'/> */}
+                </div>
               </div>
+            
             </div>
 
          
@@ -154,7 +156,8 @@ const CreateOrder = () => {
             >
               ✕
             </button>
-            <div className="flex items-center justify-end mt-4">
+            
+            <div className="flex items-center mt-auto justify-end">
               <button
                 type="submit"
                 className="px-4 py-2 bg-accent-0 text-white rounded-md"
