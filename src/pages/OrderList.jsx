@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Modal, Button } from 'antd'
-import Modala from '../components/Modal.jsx';
+import Modala from '../components/modals/Modal';
 
 
 
