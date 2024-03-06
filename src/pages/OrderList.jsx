@@ -143,7 +143,9 @@ const OrderList = () => {
         </form>
       </Modal>
        <hr className='bg-blue-500 h-1 mt-4'/>
-       <Table  columns={columns} scroll={{ x: 1000, y: 300 }}/>;
+       <div className='h-fit relative'>
+       <Table  columns={columns} scroll={{ x: 1000, y: 300 }} className='absolute' />;
+       </div>
       </div>
      
     </div>
