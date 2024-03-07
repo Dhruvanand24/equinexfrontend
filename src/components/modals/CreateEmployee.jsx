@@ -7,8 +7,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const CreateEmployee = () => {
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,45 +17,7 @@ const CreateEmployee = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      if (
-        !data.name ||
-        !data.description ||
-        !data.price ||
-        !data.quantity ||
-        !data.imageurl ||
-        !data.manufacturer ||
-        !data.category ||
-        !data.productid
-      ) {
-        setErrorMessage("All fields are required");
-        setLoading(false);
-        return;
-      }
-      const productData = {
-        Name: data.name,
-        Description: data.description,
-        Price: Number(data.price),
-        manufacturer: data.manufacturer,
-        Quantity: Number(data.quantity),
-        Category: data.category,
-        ImageUrl: data.imageurl,
-        productId: data.productid,
-      };
-
-      // Retrieve the document ID
-
-      // Close the modal
-      document.getElementById("create_new_employee_modal").close();
-      setLoading(false);
-
-      // Navigate to /barcode with the document ID as a parameter
-      navigate(`/barcode/${data.productid}`, { state: { from: location } });
-    } catch (error) {
-      console.error("Error adding product to Firestore:", error);
-      setErrorMessage("Error adding product. Please try again.");
-    }
+    
   };
 
   const AllBuyers = [{ name: "Plant Manager" }, { name: "Store Manager" }, { name: "Super Admin" }, { name: "Production" }, { name: "Quality Tester" }];
@@ -79,6 +39,7 @@ const CreateEmployee = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="text"
                     placeholder="FullName"
+                    {...register("fullname", {required: true})}
                   />
                 </div>
               </div>
@@ -90,6 +51,7 @@ const CreateEmployee = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="text"
                     placeholder="Username"
+                    {...register("username", {required: true})}
                   />
                 </div>
               </div>
@@ -101,6 +63,7 @@ const CreateEmployee = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="email"
                     placeholder="Email"
+                    {...register("email", {required: true})}
                   />
                 </div>
               </div>
@@ -111,6 +74,7 @@ const CreateEmployee = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="password"
                     placeholder="Password"
+                    {...register("password", {required: true})}
                   />
                 </div>
               </div>
@@ -126,6 +90,7 @@ const CreateEmployee = () => {
                     {AllBuyers.map((ele) => {
                       return <option className="bg-white">{ele.name}</option>;
                     })}
+                    
                   </select>
                 </div>
               </div>

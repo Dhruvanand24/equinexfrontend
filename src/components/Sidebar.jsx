@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,10 +38,10 @@ const Sidebar = () => {
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Sales & purchase</h1>
         </div>
-        <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
+        <Link to="/allpartners"><div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Partners</h1>
-        </div>
+        </div></Link>
         <div className="flex items-center select-none cursor-pointer hover:font-semibold hover:text-accent-0">
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Transport</h1>
@@ -61,6 +62,11 @@ const Sidebar = () => {
           <img src="/sidebaricon.png" alt="" />
           <h1 className="ml-2">Integration</h1>
         </div>
+
+       <Link to="allemployees"> <div className="flex items-center select-none cursor-pointer mt-auto hover:font-semibold hover:text-accent-0">
+          <img src="/sidebaricon.png" alt="" />
+          <h1 className="ml-2">Settings</h1>
+        </div></Link>
        
       </div>
     </div>
