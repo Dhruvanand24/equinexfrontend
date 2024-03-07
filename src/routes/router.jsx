@@ -6,6 +6,7 @@ import OrderList from "../pages/OrderList";
 import AddEmployee from "../pages/AddEmployee";
 import AddPartners from "../pages/AddPartners";
 import AllMaterials from "../pages/AllMaterials";
+import AllMaterialRequest from "../pages/AllMaterialRequest.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/allmaterials",
         element: <AllMaterials />,
+      },
+      {
+        path: "/allmaterialrequests",
+        element: <AllMaterialRequest />,
       },
     ],
   },

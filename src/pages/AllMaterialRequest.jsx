@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Table, Modal, Button } from "antd";
-import CreateMaterial from "../components/modals/CreateMaterial.modal";
+import CreateMaterialRequest from "../components/modals/CreateMaterialRequest.modal";
 
-const AllMaterials = () => {
+const AllMaterialRequest = () => {
   const dataSource = [];
   const columns = [
     {
@@ -40,7 +40,7 @@ const AllMaterials = () => {
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
       <p className="font-semibold text-[#4A5568] text-xl p-2 pl-0">
-        All Materials
+        Material Requests
       </p>
 
       <div className="w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2">
@@ -60,6 +60,38 @@ const AllMaterials = () => {
               />
             </div>
           </div>
+
+          <div className=" flex flex-col gap-1">
+            <p className="text-[#718096] text-sm">From Date</p>
+            <div className="relative w-fit overflow-hidden">
+              <input
+                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
+                type="text"
+                placeholder="Purchase Order No."
+              />
+              <img
+                className="absolute top-0 right-0 text-xl h-10 cursor-pointer"
+                src="/icons/Date.svg"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <div className=" flex flex-col gap-1">
+            <p className="text-[#718096] text-sm">To Date</p>
+            <div className="relative w-fit overflow-hidden">
+              <input
+                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
+                type="text"
+                placeholder="Purchase Order No."
+              />
+              <img
+                className="absolute top-0 right-0 text-xl h-10 cursor-pointer"
+                src="/icons/Date.svg"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
 
         <div className="flex w-full px-4">
@@ -67,13 +99,13 @@ const AllMaterials = () => {
           <button
             className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600"
             onClick={() =>
-              document.getElementById("create_new_material_modal").showModal()
+              document.getElementById("create_new_materialrequest_modal").showModal()
             }
           >
-            + Add Material
+            + New Request
           </button>
           {/* <Modala /> */}
-          <CreateMaterial />
+          <CreateMaterialRequest />
         </div>
 
         <hr className="bg-blue-500 h-1 mt-4" />
@@ -89,4 +121,4 @@ const AllMaterials = () => {
   );
 };
 
-export default AllMaterials;
+export default AllMaterialRequest;
