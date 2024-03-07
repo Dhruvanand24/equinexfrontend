@@ -72,7 +72,7 @@ const CreateEmployee = () => {
                     {...register("username", {required: true})}
                    
                   />
-                   {errors.Username && <p>Username is required.</p>}
+                   {errors.Username && <p className="text-sm text-red-500 italic">Username is required.</p>}
                 </div>
               </div>
 
@@ -85,7 +85,7 @@ const CreateEmployee = () => {
                     placeholder="Email"
                     {...register("email", {required: true})}
                   />
-                  {errors.email && <p>email is required.</p>}
+                  {errors.email && <p className="text-sm text-red-500 italic">email is required.</p>}
                 </div>
               </div>
               <div className=" flex flex-col gap-1 items-start justify-start">
