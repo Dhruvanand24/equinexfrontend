@@ -10,6 +10,7 @@ const CreateMaterialRequest = () => {
   const [loading, setLoading] = useState(false);
   const [allOrders, setAllOrders] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
+  const [allDepartments, setAllDepartments] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const {
     register,
@@ -24,33 +25,34 @@ const CreateMaterialRequest = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    console.log(data,selectedMaterials);
-    // const creationdata = {
-    //   Name: data.materialName,
-    //   description: data,
-    // };
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:8000/api/v1/material/createMaterial",
-    //     creationdata,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   console.log(response.data);
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //   }, 500);
+    console.log(data, selectedMaterials);
+    const creationdata = {
+      Order_Id: data.Order_Id,
+      List_of_materials: selectedMaterials,
+      Department_request_raise: data.Department_request_raise,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/material/createMaterialRequest",
+        creationdata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
 
-    //   //   document.getElementById("create_new_material_modal").close()
-    // } catch (error) {
-    //   console.log("failed", error.response.data);
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //   }, 500);
-    // }
+      //   document.getElementById("create_new_material_modal").close()
+    } catch (error) {
+      console.log("failed", error.response.data);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
   };
 
   const AllBuyers = [
@@ -68,14 +70,21 @@ const CreateMaterialRequest = () => {
       const material_res = await axios.get(
         "http://localhost:8000/api/v1/material/getallmaterial"
       );
+      const department_res = await axios.get(
+        "http://localhost:8000/api/v1/department/getalldepartment"
+      );
       if (!order_res.data) {
         throw new Error("Orders not found");
       }
       if (!material_res.data) {
         throw new Error("Material not found");
       }
+      if (!department_res.data) {
+        throw new Error("Department not found");
+      }
       setAllMaterials(material_res.data.data);
       setAllOrders(order_res?.data?.data);
+      setAllDepartments(department_res?.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -87,18 +96,20 @@ const CreateMaterialRequest = () => {
       console.log("Quantity must be at least 1");
       return;
     }
-  
-    console.log(quan);
-  
-    const idx = selectedMaterials.findIndex((ele) => ele.id.toString() === id.toString());
-  
+
+    console.log(quan, id);
+
+    const idx = selectedMaterials.findIndex(
+      (ele) => ele.material_id?.toString() === id?.toString()
+    );
+
     // Ensure the index is valid
     if (idx !== -1) {
       setSelectedMaterials((prevSelectedMaterials) => {
         // Create a new array with the updated quantity for the specific material
         const updatedMaterials = [...prevSelectedMaterials];
         updatedMaterials[idx] = { ...updatedMaterials[idx], quantity: quan };
-  
+
         return updatedMaterials;
       });
     }
@@ -106,19 +117,22 @@ const CreateMaterialRequest = () => {
 
   const handleCheck = (ele) => {
     setSelectedMaterials((prevSelectedMaterials) => {
-      const isChecked = prevSelectedMaterials.some((e) => e.id === ele._id);
-  
+      const isChecked = prevSelectedMaterials.some(
+        (e) => e.material_id === ele._id
+      );
+
       if (isChecked) {
         // If checked, remove the element
-        return prevSelectedMaterials.filter((e) => e.id !== ele._id);
+        return prevSelectedMaterials.filter((e) => e.material_id !== ele._id);
       } else {
         // If unchecked, add the element
-        return [...prevSelectedMaterials, { id: ele._id, quantity: 1 }];
+        return [
+          ...prevSelectedMaterials,
+          { material_id: ele._id, quantity: 1 },
+        ];
       }
     });
   };
-  
-
 
   useEffect(() => {
     fetchdata();
@@ -189,18 +203,25 @@ const CreateMaterialRequest = () => {
                             className="w-fit bg-black-0"
                             onChange={() => handleCheck(ele)}
                             checked={selectedMaterials.some(
-                              (e) => e.id === ele._id
+                              (e) => e.material_id === ele._id
                             )}
                           />
 
                           <p className="w-fit">{ele.Name}</p>
-                          {selectedMaterials.some((e) => e.id === ele._id) ? (
+                          {selectedMaterials.some(
+                            (e) => e.material_id === ele._id
+                          ) ? (
                             <input
                               type="Number"
                               placeholder="quantity"
                               defaultValue={1}
                               className="w-[50px]"
-                              onChange={(e)=>updateSelectedMaterialQuantity(e.target.value, ele._id)}
+                              onChange={(e) =>
+                                updateSelectedMaterialQuantity(
+                                  e.target.value,
+                                  ele._id
+                                )
+                              }
                             />
                           ) : (
                             <></>
@@ -216,14 +237,25 @@ const CreateMaterialRequest = () => {
               <div className=" flex flex-col gap-1 items-start justify-start">
                 <p className=" text-sm">Department</p>
                 <div className="w-fit overflow-hidden">
-                  <input
-                    className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
-                    type="text"
-                    placeholder="Enter Department"
-                    {...register("Department_request_raise", {
-                      required: true,
-                    })}
-                  />
+                <select
+                    {...register("Department_request_raise")}
+                    value={watch("Department_request_raise")}
+                    onChange={(e) => setValue("Department_request_raise", e.target.value)}
+                    className="text-[14px] h-[42px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-md border-ring-0 border-[1px] px-4  cursor-text outline-blue-500"
+                  >
+                    <option value="" className="bg-white">
+                      Select Order
+                    </option>
+                    {allDepartments?.map((ele) => (
+                      <option
+                        key={ele._id}
+                        value={ele._id}
+                        className="bg-white"
+                      >
+                        {ele?.name} 
+                      </option>
+                    ))}
+                  </select>
                   {errors.unit && (
                     <p className="text-sm text-red-500 italic">
                       Department is required.
