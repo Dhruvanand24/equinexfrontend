@@ -1,4 +1,5 @@
-import { DatePicker } from "antd";
+import { DatePicker , Alert } from "antd";
+import axios from "axios";
 import { Item } from "rc-menu";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -6,6 +7,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 // import MultiSelectDropdown from '../MultiSelectDropdown.jsx';
 
 const CreateEmployee = () => {
+  
+    const [loading, setLoading] = useState(false);
+    
 
   const {
     register,
@@ -17,13 +21,27 @@ const CreateEmployee = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    
+    setLoading(true);
+    try {
+        const response = axios.post("http://localhost:8000/api/v1/users/register", data,{
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          console.log(response.data);
+          setLoading(false);
+          
+    } catch (error) {
+        console.log("failed", error.response.data);
+        
+    }
   };
 
   const AllBuyers = [{ name: "Plant Manager" }, { name: "Store Manager" }, { name: "Super Admin" }, { name: "Production" }, { name: "Quality Tester" }];
 
   return (
     <dialog id="create_new_employee_modal" className="modal backdrop-blur-sm">
+        
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
         <div className="modal-action h-full">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full" method="dialog">
@@ -39,7 +57,7 @@ const CreateEmployee = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="text"
                     placeholder="FullName"
-                    {...register("fullname", {required: true})}
+                    {...register("fullName", {required: true})}
                   />
                 </div>
               </div>
@@ -52,7 +70,9 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Username"
                     {...register("username", {required: true})}
+                   
                   />
+                   {errors.Username && <p>Username is required.</p>}
                 </div>
               </div>
 
@@ -65,6 +85,7 @@ const CreateEmployee = () => {
                     placeholder="Email"
                     {...register("email", {required: true})}
                   />
+                  {errors.email && <p>email is required.</p>}
                 </div>
               </div>
               <div className=" flex flex-col gap-1 items-start justify-start">
@@ -76,6 +97,7 @@ const CreateEmployee = () => {
                     placeholder="Password"
                     {...register("password", {required: true})}
                   />
+                  {errors.password && <p>password is required.</p>}
                 </div>
               </div>
 
