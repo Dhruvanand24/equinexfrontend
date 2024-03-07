@@ -23,7 +23,7 @@ const CreateEmployee = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-        const response = axios.post("http://localhost:8000/api/v1/users/register", data,{
+        const response = await axios.post("http://localhost:8000/api/v1/users/register", data,{
             headers: {
               'Content-Type': 'application/json',
             },
@@ -154,15 +154,15 @@ const CreateEmployee = () => {
               ✕
             </button>
             
-            {!loading?<div className="flex items-center mt-auto justify-end">
+            {loading?<div className="flex items-center mt-auto justify-end">
+              <Spin />
+            </div>:<div className="flex items-center mt-auto justify-end">
               <button
                 type="submit"
                 className="px-4 py-2 bg-accent-0 text-white rounded-md"
               >
                Add Employee
               </button>
-            </div>:<div className="flex items-center mt-auto justify-end">
-              <Spin />
             </div>}
           </form>
         </div>
