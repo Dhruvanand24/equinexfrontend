@@ -36,12 +36,17 @@ const CreateMaterial = () => {
         }
       );
       console.log(response.data);
-      setLoading(false);
-      document.getElementById("create_new_material_modal").close()
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+      
+    //   document.getElementById("create_new_material_modal").close()
 
     } catch (error) {
       console.log("failed", error.response.data);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   };
 
