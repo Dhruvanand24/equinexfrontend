@@ -3,6 +3,8 @@ import Home from "../pages/Home";
 import Main from "../layout/Main";
 import Login from "../pages/Login";
 import OrderList from "../pages/OrderList";
+import AddEmployee from "../pages/AddEmployee";
+import AddPartners from "../pages/AddPartners";
 
 
 const router = createBrowserRouter([
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
         {
           path:"/orderlist",
           element:<OrderList/>
+        },
+        {
+          path: "/allemployees",
+          element:<AddEmployee />
+        },
+        {
+          path: "/allpartners",
+          element: <AddPartners />
         }
 
 ]},
