@@ -1,4 +1,4 @@
-import { DatePicker } from "antd";
+import { DatePicker, Spin } from "antd";
 import { Item } from "rc-menu";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -149,7 +149,7 @@ const CreateSeller = () => {
                 type="submit"
                 className="px-4 py-2 bg-accent-0 text-white rounded-md"
               >
-                Add Seller
+                {loading?<Spin/>:"Add Seller"}
               </button>
             </div>
           </form>

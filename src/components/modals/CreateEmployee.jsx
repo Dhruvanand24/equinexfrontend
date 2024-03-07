@@ -1,4 +1,4 @@
-import { DatePicker , Alert } from "antd";
+import { DatePicker , Alert, Spin } from "antd";
 import axios from "axios";
 import { Item } from "rc-menu";
 import React, { useState } from "react";
@@ -154,14 +154,16 @@ const CreateEmployee = () => {
               ✕
             </button>
             
-            <div className="flex items-center mt-auto justify-end">
+            {!loading?<div className="flex items-center mt-auto justify-end">
               <button
                 type="submit"
                 className="px-4 py-2 bg-accent-0 text-white rounded-md"
               >
-                Add Employee
+               Add Employee
               </button>
-            </div>
+            </div>:<div className="flex items-center mt-auto justify-end">
+              <Spin />
+            </div>}
           </form>
         </div>
       </div>
