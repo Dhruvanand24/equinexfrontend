@@ -3,10 +3,11 @@ import { Item } from "rc-menu";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios';
 // import MultiSelectDropdown from '../MultiSelectDropdown.jsx';
 
 const CreateOrder = () => {
-  const [AllBuyers, setAllByers] = useState([]);
+  const [AllBuyers, setAllBuyers] = useState([]);
   const [AllProcesses, setAllProcesses] = useState([]);
   const [orderBy, setOrderBy] = useState({});
   const [dealAmount, setDealAmount] = useState("");
@@ -16,37 +17,28 @@ const CreateOrder = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const fetchdat = async () => {
+  const fetchData = async () => {
     try {
-      const allbuers = await fetch(
-        "http://localhost:8000/api/v1/buyer/getallbuyers"
-      );
-      const data = await allbuers.json();
-      console.log(data);
-      if (!data) {
-        throw new Error("buyers not found");
-      }
-      setAllByers(data.data);
+      const buyersResponse = await axios.get('http://localhost:8000/api/v1/buyer/getallbuyers');
+      const processData = await axios.get('http://localhost:8000/api/v1/process/getallprocesses');
 
-      const allprocesses = await fetch(
-        "http://localhost:8000/api/v1/process/getallprocesses"
-      );
-      const processdata = await allprocesses.json();
-      if (!processdata) {
-        throw new Error("all process not found");
+      if (!buyersResponse.data || !processData.data) {
+        throw new Error('Data not found');
       }
-      setAllProcesses(processdata.data);
+
+      setAllBuyers(buyersResponse.data.data);
+      setAllProcesses(processData.data.data);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching data:', error);
     }
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const doublecheck=confirm("Are you want to place order!")
-    if(!doublecheck){
-      return;
-    }
+    // const doublecheck=confirm("Are you want to place order!")
+    // if(!doublecheck){
+    //   return;
+    // }
     try {
       
       const body_data = {
@@ -58,26 +50,29 @@ const CreateOrder = () => {
         production_process: selectedProcesses,
       };
 
-      console.log(body_data)
+      // console.log(body_data)
 
-      const res=await fetch('http://localhost:8000/api/v1/orders/createorder',{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify(body_data)
-      });
+      // const res=await fetch('http://localhost:8000/api/v1/orders/createorder',{
+      //   method:"POST",
+      //   headers:{
+      //     "Content-Type":"application/json"
+      //   },
+      //   body:JSON.stringify(body_data)
+      // });
 
-      const resData=await res.json();
+      const resData= await axios.post('http://localhost:8000/api/v1/orders/createorder', body_data);
 
-      if(!resData){
+
+      if(!resData.data){
         throw new Error("Order not placed")
       }
-
-      alert('order placed');
-      console.log(resData)
+      if(resData.data.success)
+        alert(resData.data.message);
+      else new Error("Order not placed")
+      // console.log(resData.data)
     } catch (error) {
-      console.log(error);
+      alert("order not palced !",error);
+      // console.log("order not palced !",error);
     }
 
     document.getElementById("create_new_order_modal").close();
@@ -96,7 +91,7 @@ const CreateOrder = () => {
   };
 
   useEffect(() => {
-    fetchdat();
+    fetchData();
   }, []);
   // const AllBuyers = [{ name: "kaif" }, { name: "Dhruv" }, { name: "Anjali" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" }, { name: "kaif" },];
 
