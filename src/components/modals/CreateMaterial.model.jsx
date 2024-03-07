@@ -39,9 +39,8 @@ const CreateMaterial = () => {
       setTimeout(() => {
         setLoading(false);
       }, 500);
-      
-    //   document.getElementById("create_new_material_modal").close()
 
+      //   document.getElementById("create_new_material_modal").close()
     } catch (error) {
       console.log("failed", error.response.data);
       setTimeout(() => {
