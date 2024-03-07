@@ -35,10 +35,10 @@ const CreateOrder = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const doublecheck=confirm("Are you want to place order!")
-    if(!doublecheck){
-      return;
-    }
+    // const doublecheck=confirm("Are you want to place order!")
+    // if(!doublecheck){
+    //   return;
+    // }
     try {
       
       const body_data = {
@@ -50,7 +50,7 @@ const CreateOrder = () => {
         production_process: selectedProcesses,
       };
 
-      console.log(body_data)
+      // console.log(body_data)
 
       // const res=await fetch('http://localhost:8000/api/v1/orders/createorder',{
       //   method:"POST",
@@ -68,10 +68,11 @@ const CreateOrder = () => {
       }
       if(resData.data.success)
         alert(resData.data.message);
-      else alert(resData.data.message)
-      console.log(resData.data)
+      else new Error("Order not placed")
+      // console.log(resData.data)
     } catch (error) {
-      console.log(error);
+      alert("order not palced !",error);
+      // console.log("order not palced !",error);
     }
 
     document.getElementById("create_new_order_modal").close();
