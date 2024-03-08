@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Modal, Button } from 'antd'
 import CreateOrder from '../components/modals/CreateOrder.modal.jsx';
+// import { getUser } from '../store/userSlice.js';
+import { useSelector } from 'react-redux';
 
 
 
@@ -9,7 +11,7 @@ import CreateOrder from '../components/modals/CreateOrder.modal.jsx';
 
 const OrderList = () => {
 
- 
+//  const [user,setUser]=useState(useSelector(state=> state.user.currentUser));
 
   const dataSource = [
     {
@@ -283,6 +285,8 @@ const OrderList = () => {
       fixed: 'right',
     },
   ];
+// console.log(user);
+  
   return (
     <div className='bg-white p-4 w-full flex flex-col justify-start items-start h-full'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Orders</p>
