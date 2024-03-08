@@ -34,7 +34,11 @@ const CreateOrder = () => {
   };
 
   const submitForm = async (e) => {
-    e.preventDefault();
+    if (!document.getElementById("create_new_order_modal").open) {
+      // The modal is closed, do not submit the form
+      return;
+    }
+    // e.preventDefault();
     // const doublecheck=confirm("Are you want to place order!")
     // if(!doublecheck){
     //   return;
@@ -100,7 +104,10 @@ const CreateOrder = () => {
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
         <div className="modal-action h-full">
           <form
-            onSubmit={submitForm}
+            onSubmit={(e)=>{
+              e.preventDefault();
+              submitForm();
+              }}
             className="flex flex-col h-full"
             method="dialog"
           >

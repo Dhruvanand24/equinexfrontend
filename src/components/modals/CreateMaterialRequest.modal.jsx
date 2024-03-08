@@ -24,6 +24,7 @@ const CreateMaterialRequest = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+
     setLoading(true);
     console.log(data, selectedMaterials);
     const creationdata = {
@@ -146,7 +147,7 @@ const CreateMaterialRequest = () => {
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
         <div className="modal-action h-full">
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={()=>handleSubmit(onSubmit)}
             className="flex flex-col h-full"
             method="dialog"
           >
