@@ -78,13 +78,13 @@ const Sidebar = () => {
         <SidebarOption title="Dashboard" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Inventory" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Sales & Purchase" icon="/sidebaricon.png" link="#" />
-        <SidebarOption title="Partners" icon="/sidebaricon.png" link="/allpartners" submenuOptions={submenuOptionsAllPartners} />
+       <Link to="/allpartners"> <SidebarOption title="Partners" icon="/sidebaricon.png" submenuOptions={submenuOptionsAllPartners} /></Link>
         <SidebarOption title="Transport" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Production" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Expenses" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Reports" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Integration" icon="/sidebaricon.png" link="#" />
-        <SidebarOption title="Settings" icon="/sidebaricon.png" link="/allemployees" submenuOptions={submenuOptionsSettings} />
+        <Link to="/allemployees"><SidebarOption title="Settings" icon="/sidebaricon.png" link="/allemployees" submenuOptions={submenuOptionsSettings} /></Link>
       </div>
     </div>
   );
