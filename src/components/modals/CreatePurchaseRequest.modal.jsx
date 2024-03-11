@@ -12,7 +12,6 @@ const CreatePurchaseRequest = () => {
   const [allMaterials, setAllMaterials] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useGetUser();
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -27,11 +26,8 @@ const CreatePurchaseRequest = () => {
     setLoading(true);
     try {
       const data = {
-        Requester:user._id,
         List_of_materials:selectedMaterials,
       };
-
-      //   console.log(user._id);
       const response = await axios.post(
         "http://localhost:8000/api/v1/purchase/createpurchaserequest",
         data,
