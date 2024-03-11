@@ -24,7 +24,10 @@ const CreateMaterialRequest = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-
+    if(!document.getElementById("create_new_materialrequest_modal").close()){
+      return;
+    }
+    console.log(data);
     setLoading(true);
     console.log(data, selectedMaterials);
     const creationdata = {
@@ -44,13 +47,15 @@ const CreateMaterialRequest = () => {
       );
       console.log(response.data);
       setTimeout(() => {
+        alert(response.data.message)
         setLoading(false);
       }, 500);
 
       //   document.getElementById("create_new_material_modal").close()
     } catch (error) {
-      console.log("failed", error.response.data);
+      console.log("failed", error.response.data.message);
       setTimeout(() => {
+        alert(error.response.data.message)
         setLoading(false);
       }, 500);
     }
@@ -147,7 +152,7 @@ const CreateMaterialRequest = () => {
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
         <div className="modal-action h-full">
           <form
-            onSubmit={()=>handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col h-full"
             method="dialog"
           >

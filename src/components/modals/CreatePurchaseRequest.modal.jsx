@@ -44,12 +44,15 @@ const CreatePurchaseRequest = () => {
 
       console.log(response);
       setTimeout(() => {
-        alert("Request created");
+        alert(response.data.message);
       }, 500);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log("failed", error);
+      setTimeout(() => {
+        alert(error.response.data.message);
+      }, 500);
     }
   };
 
