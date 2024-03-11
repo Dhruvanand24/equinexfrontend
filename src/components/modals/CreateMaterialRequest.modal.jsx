@@ -12,6 +12,7 @@ const CreateMaterialRequest = () => {
   const [allMaterials, setAllMaterials] = useState([]);
   const [allDepartments, setAllDepartments] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
   const {
     register,
     handleSubmit,
@@ -24,6 +25,13 @@ const CreateMaterialRequest = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    const modal = document.getElementById("create_new_materialrequest_modal");
+
+    if (!isOpen) {
+      setIsOpen(true);
+      return;
+    }
+    console.log(data);
     setLoading(true);
     console.log(data, selectedMaterials);
     const creationdata = {
@@ -43,13 +51,15 @@ const CreateMaterialRequest = () => {
       );
       console.log(response.data);
       setTimeout(() => {
+        alert(response.data.message);
         setLoading(false);
       }, 500);
 
       //   document.getElementById("create_new_material_modal").close()
     } catch (error) {
-      console.log("failed", error.response.data);
+      console.log("failed", error.response.data.message);
       setTimeout(() => {
+        alert(error.response.data.message);
         setLoading(false);
       }, 500);
     }
@@ -237,10 +247,12 @@ const CreateMaterialRequest = () => {
               <div className=" flex flex-col gap-1 items-start justify-start">
                 <p className=" text-sm">Department</p>
                 <div className="w-fit overflow-hidden">
-                <select
+                  <select
                     {...register("Department_request_raise")}
                     value={watch("Department_request_raise")}
-                    onChange={(e) => setValue("Department_request_raise", e.target.value)}
+                    onChange={(e) =>
+                      setValue("Department_request_raise", e.target.value)
+                    }
                     className="text-[14px] h-[42px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-md border-ring-0 border-[1px] px-4  cursor-text outline-blue-500"
                   >
                     <option value="" className="bg-white">
@@ -252,7 +264,7 @@ const CreateMaterialRequest = () => {
                         value={ele._id}
                         className="bg-white"
                       >
-                        {ele?.name} 
+                        {ele?.name}
                       </option>
                     ))}
                   </select>
@@ -267,11 +279,12 @@ const CreateMaterialRequest = () => {
 
             <button
               htmlFor="create_new_material_modal"
-              onClick={() =>
+              onClick={() => {
+                setIsOpen(false);
                 document
                   .getElementById("create_new_materialrequest_modal")
-                  .close()
-              }
+                  .close();
+              }}
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             >
               ✕

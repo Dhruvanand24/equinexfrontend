@@ -19,6 +19,10 @@ const CreateMaterial = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    if (!document.getElementById("create_new_material_modal").open) {
+      // The modal is closed, do not submit the form
+      return;
+    }
     setLoading(true);
     console.log(data);
     const creationdata = {
