@@ -7,7 +7,6 @@ import AddEmployee from "../pages/AddEmployee";
 import AddPartners from "../pages/AddPartners";
 import AllMaterials from "../pages/AllMaterials";
 import AllMaterialRequest from "../pages/AllMaterialRequest.jsx";
-import AllPurchaseRequest from "../pages/AllPurchaseRequest.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,10 +37,6 @@ const router = createBrowserRouter([
         path: "/allmaterialrequests",
         element: <AllMaterialRequest />,
       },
-      {
-        path: "/allpurchaserequests",
-        element: <AllPurchaseRequest/>
-      }
     ],
   },
   {
