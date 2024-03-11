@@ -19,6 +19,10 @@ const CreatePurchaseRequest = () => {
 
   const onSubmit = async () => {
     // e.preventDefault();
+    if (!document.getElementById("create_new_purchase_request_modal").open) {
+      // The modal is closed, do not submit the form
+      return;
+    }
     console.log(selectedMaterials);
     setLoading(true);
     try {
@@ -216,7 +220,7 @@ const CreatePurchaseRequest = () => {
                   type="submit"
                   className="px-4 py-2 bg-accent-0 text-white rounded-md"
                 >
-                  Add Buyer
+                  Create Request
                 </button>
               </div>
             )}
