@@ -3,8 +3,6 @@ import { Table, Modal, Button } from "antd";
 import CreatePurchaseRequest from "../components/modals/CreatePurchaseRequest.modal";
 
 const AllPurchaseRequest = () => {
-
- 
   const dataSource = [];
   const columns = [
     {
@@ -101,7 +99,9 @@ const AllPurchaseRequest = () => {
           <button
             className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600"
             onClick={() =>
-              document.getElementById("create_new_purchase_request_modal").showModal()
+              document
+                .getElementById("create_new_purchase_request_modal")
+                .showModal()
             }
           >
             + New Request

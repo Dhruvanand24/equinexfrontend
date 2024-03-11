@@ -26,7 +26,7 @@ const CreatePurchaseRequest = () => {
     setLoading(true);
     try {
       const data = {
-        List_of_materials:selectedMaterials,
+        List_of_materials: selectedMaterials,
       };
       const response = await axios.post(
         "http://localhost:8000/api/v1/purchase/createpurchaserequest",

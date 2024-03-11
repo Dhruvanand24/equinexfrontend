@@ -99,7 +99,9 @@ const AllMaterialRequest = () => {
           <button
             className=" px-4 py-2 bg-blue-500 rounded-[5px] text-white left-[85%] hover:bg-blue-600"
             onClick={() =>
-              document.getElementById("create_new_materialrequest_modal").showModal()
+              document
+                .getElementById("create_new_materialrequest_modal")
+                .showModal()
             }
           >
             + New Request

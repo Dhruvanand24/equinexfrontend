@@ -3,7 +3,7 @@ import { Item } from "rc-menu";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 // import MultiSelectDropdown from '../MultiSelectDropdown.jsx';
 
 const CreateOrder = () => {
@@ -19,17 +19,21 @@ const CreateOrder = () => {
 
   const fetchData = async () => {
     try {
-      const buyersResponse = await axios.get('http://localhost:8000/api/v1/buyer/getallbuyers');
-      const processData = await axios.get('http://localhost:8000/api/v1/process/getallprocesses');
+      const buyersResponse = await axios.get(
+        "http://localhost:8000/api/v1/buyer/getallbuyers"
+      );
+      const processData = await axios.get(
+        "http://localhost:8000/api/v1/process/getallprocesses"
+      );
 
       if (!buyersResponse.data || !processData.data) {
-        throw new Error('Data not found');
+        throw new Error("Data not found");
       }
 
       setAllBuyers(buyersResponse.data.data);
       setAllProcesses(processData.data.data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -44,7 +48,6 @@ const CreateOrder = () => {
     //   return;
     // }
     try {
-      
       const body_data = {
         Order_By: orderBy.toString(),
         Date_of_Order: Date.now(),
@@ -64,18 +67,19 @@ const CreateOrder = () => {
       //   body:JSON.stringify(body_data)
       // });
 
-      const resData= await axios.post('http://localhost:8000/api/v1/orders/createorder', body_data);
+      const resData = await axios.post(
+        "http://localhost:8000/api/v1/orders/createorder",
+        body_data
+      );
 
-
-      if(!resData.data){
-        throw new Error("Order not placed")
+      if (!resData.data) {
+        throw new Error("Order not placed");
       }
-      if(resData.data.success)
-        alert(resData.data.message);
-      else new Error("Order not placed")
+      if (resData.data.success) alert(resData.data.message);
+      else new Error("Order not placed");
       // console.log(resData.data)
     } catch (error) {
-      alert("order not palced !",error);
+      alert("order not palced !", error);
       // console.log("order not palced !",error);
     }
 
@@ -104,10 +108,10 @@ const CreateOrder = () => {
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
         <div className="modal-action h-full">
           <form
-            onSubmit={(e)=>{
+            onSubmit={(e) => {
               e.preventDefault();
               submitForm();
-              }}
+            }}
             className="flex flex-col h-full"
             method="dialog"
           >
