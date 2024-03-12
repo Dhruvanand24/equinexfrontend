@@ -23,7 +23,10 @@ export default {
         heading: ["#4A5568"],
         textboxtext: ["#8792A4"],
         sidebar: ["#718096"],
-        ring: ["#BACFFF"]
+        ring: ["#BACFFF"],
+        pending: ["#E84A50"],
+        approved: ["#31EDB4"],
+        approvedtext: ["#28D19E"]
       }
     },
   },

@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ShowMaterials from "../../components/modals/ShowMaterials.modal";
@@ -16,7 +16,7 @@ const MaterialRequestApproval = () => {
   //     }
   // ];
 
-  const [dataSource, setDataSouurce] = useState([]);
+  const [dataSource, setDataSource] = useState([]);
   const [allDepartment, setAllDepartment] = useState([]);
   const [allRequests, setAllRequests] = useState([]);
   const [requestMaterial, setRequestMaterial] = useState([]);
@@ -41,6 +41,14 @@ const MaterialRequestApproval = () => {
       title: "Department",
       dataIndex: "Department",
       key: "Department",
+      render: (_, { Department }) => {
+        let color = "green";
+        return (
+          <Tag color={color} key={Department}>
+            {Department ? Department.toUpperCase() : ""}
+          </Tag>
+        );
+      },
     },
     {
       title: "DOO",
@@ -52,10 +60,10 @@ const MaterialRequestApproval = () => {
       key: "action",
       render: (_, record) => (
         <span
-          className="p-2 px-4 w-fit bg-green-400 rounded-md cursor-pointer"
+          className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
           onClick={() => showMaterials(record["MR ID"])}
         >
-          view
+          View
         </span>
       ),
     },
@@ -66,7 +74,7 @@ const MaterialRequestApproval = () => {
         <div>
           {record.Status ? (
             <span
-              className="p-2 w-fit bg-green-400 rounded-md cursor-pointer"
+              className="p-2 w-fit bg-approved-0 bg-opacity-15 font-semibold text-approvedtext-0 rounded-md cursor-pointer"
               onClick={() => {
                 toggleStatus(record["MR ID"],record.Status);
               }}
@@ -75,12 +83,12 @@ const MaterialRequestApproval = () => {
             </span>
           ) : (
             <span
-              className="p-2 w-fit bg-red-400 rounded-md cursor-pointer"
+              className="p-2 w-fit bg-pending-0 bg-opacity-15 text-pending-0 font-semibold rounded-md cursor-pointer"
               onClick={() => {
                 toggleStatus(record["MR ID"],record.Status);
               }}
             >
-              pendding
+              pending
             </span>
           )}
         </div>
@@ -148,7 +156,7 @@ const MaterialRequestApproval = () => {
         };
 
         // Corrected: Use array spread to append the new data object to the dataSource array
-        setDataSouurce((prevDataSource) => [...prevDataSource, data]);
+        setDataSource((prevDataSource) => [...prevDataSource, data]);
       });
 
       console.log(dataSource);
