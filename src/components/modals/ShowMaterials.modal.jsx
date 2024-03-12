@@ -1,15 +1,13 @@
-import { DatePicker, Spin, Table } from "antd";
-import axios from "axios";
+import { Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
-const ShowMaterials = (data) => {
-  console.log("data", data.data);
-  const [allData, setAllData] = useState([])
-  useEffect(()=>{
-    setAllData(data.data);
-  },[])
+const ShowMaterials = (props) => {
+  const [allData, setAllData] = useState([]);
+  
+  useEffect(() => {
+    setAllData(props.data);
+  }, [props.data]);
+
   const columns = [
     {
       title: "S.no",
@@ -30,24 +28,20 @@ const ShowMaterials = (data) => {
     {
       title: "Quanitity",
       dataIndex: "quantity",
-      key: "quantity"
-    }
-  ]
-  
+      key: "quantity",
+    },
+  ];
 
   return (
     <dialog id="show_material_modal" className="modal backdrop-blur-sm">
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
-        
         <div className="modal-action h-full w-full">
           <form className="flex flex-col h-full w-full p-5" method="dialog">
-          <h3 className="font-bold text-[18px] text-heading-0 mb-4">
+            <h3 className="font-bold text-[18px] text-heading-0 mb-4">
               All Materials List
             </h3>
             <hr />
-           
-           <Table columns={columns} dataSource={allData} />
-
+            <Table columns={columns} dataSource={allData} />
             <button
               htmlFor="show_material_modal"
               onClick={() =>

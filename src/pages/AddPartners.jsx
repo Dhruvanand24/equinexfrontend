@@ -40,7 +40,7 @@ const AddPartners = () => {
       key: "type",
       dataIndex: "type",
       render: (_, { type }) => {
-        let color = type === "Buyer" ? "#E84A50" : "#31EDB4";
+        let color = type === "Buyer" ? "geekblue" : "green";
         return (
           <Tag color={color} key={type}>
             {type ? type.toUpperCase() : ""}
