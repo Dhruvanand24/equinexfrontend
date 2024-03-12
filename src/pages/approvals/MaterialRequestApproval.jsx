@@ -1,19 +1,25 @@
 import { Table } from "antd";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import ShowMaterials from "../../components/modals/ShowMaterials.modal";
 
 const MaterialRequestApproval = () => {
-    const dataSource = [
-        {
-            "S.no": "1",
-            OrderId: "1234",
-            Department: "Initial",
-            Requester: "me",
-            DOO: "today",
-            "List Of Materials": "view",
-            Status: <span className='p-2 w-fit bg-green-400 rounded-md'>Approved</span>
-        }
-    ];
-    
+  // const dataSource = [
+  //     {
+  //         "S.no": "1",
+  //         OrderId: "1234",
+  //         Department: "Initial",
+  //         Requester: "me",
+  //         DOO: "today",
+  //         "List Of Materials": "view",
+  //         Status: <span className='p-2 w-fit bg-green-400 rounded-md'>Approved</span>
+  //     }
+  // ];
+
+  const [dataSource, setDataSouurce] = useState([]);
+  const [allDepartment,setAllDepartment] = useState([]);
+  const [allRequests,setAllRequests]=useState([]);
+  const [requestMaterial, setRequestMaterial]=useState([]);
   const columns = [
     {
       title: "S.no",
@@ -27,14 +33,14 @@ const MaterialRequestApproval = () => {
       key: "OrderId",
     },
     {
+      title: "MR ID",
+      dataIndex: "MR ID",
+      key: "MR ID",
+    },
+    {
       title: "Department",
       dataIndex: "Department",
       key: "Department",
-    },
-    {
-      title: "Requester",
-      dataIndex: "Requester",
-      key: "Requester",
     },
     {
       title: "DOO",
@@ -43,8 +49,15 @@ const MaterialRequestApproval = () => {
     },
     {
       title: "List Of Materials",
-      dataIndex: "List Of Materials",
-      key: "List Of Materials",
+      key: "action",
+      render: (_, record) => (
+        <span
+          className="p-2 px-4 w-fit bg-green-400 rounded-md cursor-pointer"
+          onClick={() => showMaterials(record["MR ID"])}
+        >
+          view
+        </span>
+      ),
     },
     {
       title: "Status",
@@ -52,6 +65,67 @@ const MaterialRequestApproval = () => {
       key: "Status",
     },
   ];
+  const showMaterials = (_id) => {
+    console.log(_id);
+    
+      const request = allRequests.find(
+        (item) => item._id === _id
+      );
+      console.log(request.List_of_materials);
+      setRequestMaterial(request.List_of_materials);
+      document.getElementById("show_material_modal").showModal();
+  };
+
+  const fetchdata = async () => {
+    try {
+      const responseMaterialRequest = await axios.get(
+        "http://localhost:8000/api/v1/material/getallmaterialrequest"
+      );
+      const allmaterialrequests = responseMaterialRequest.data.data;
+      setAllRequests(allmaterialrequests);
+      const responseAllDepartment = await axios.get(
+        "http://localhost:8000/api/v1/department/getalldepartment"
+      );
+      const alldepartments = responseAllDepartment.data.data;
+      console.log(alldepartments);
+      setAllDepartment(alldepartments);
+      allmaterialrequests.forEach((e, index) => {
+        const dateString = new Date(e?.Date_of_request);
+        const department = alldepartments.find(
+          (item) => item._id === e?.Department_request_raise
+        );
+
+        const data = {
+          "S.no": index + 1,
+          OrderId: e?.Order_Id,
+          "MR ID": e?._id,
+          Department: department?.name,
+          DOO: `${dateString.getDate()}-${dateString.getMonth()}-${dateString.getFullYear()}`,
+
+          Status: e?.Status_approval.isapproved ? (
+            <span className="p-2 w-fit bg-green-400 rounded-md cursor-pointer">
+              Approved
+            </span>
+          ) : (
+            <span className="p-2 w-fit bg-red-400 rounded-md cursor-pointer">
+              pendding
+            </span>
+          ),
+        };
+
+        // Corrected: Use array spread to append the new data object to the dataSource array
+        setDataSouurce((prevDataSource) => [...prevDataSource, data]);
+      });
+
+      console.log(dataSource);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, []);
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
       <p className="font-semibold text-[#4A5568] text-xl p-2 pl-0">
@@ -108,9 +182,7 @@ const MaterialRequestApproval = () => {
             </div>
           </div>
         </div>
-
-        
-
+        <ShowMaterials data={requestMaterial}/>
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
