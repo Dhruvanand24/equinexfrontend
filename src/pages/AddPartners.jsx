@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Table, Modal, Button, Tag } from "antd";
+import { Table, Modal, Button, Tag, Input } from "antd";
 import CreateEmployee from "../components/modals/CreateEmployee";
 import CreateBuyer from "../components/modals/CreateBuyer";
 import CreateSeller from "../components/modals/CreateSeller";
 import axios from "axios";
+import Fuse from "fuse.js";
 
 const AddPartners = () => {
   const [selectedPost, setSelectedPost] = useState("");
   const [allBuyers, setAllBuyers] = useState([]);
   const [allSellers, setAllSellers] = useState([]);
   const [allPartners, setAllPartners] = useState([]);
+  const [filteredPartners, setFilteredPartners] = useState([]);
+
   const AllBuyers = [
     { name: "All" },
     { name: "Buyers" },
@@ -35,12 +38,13 @@ const AddPartners = () => {
       key: "type",
       dataIndex: "type",
       render: (_, { type }) => {
-      
-        let color = type==="Seller" ? 'geekblue' : 'green';
-        return <Tag color={color} key={type}>
-          {type.toUpperCase()}
-        </Tag>
-    },
+        let color = type === "Seller" ? "geekblue" : "green";
+        return (
+          <Tag color={color} key={type}>
+            {type ? type.toUpperCase() : ""}
+          </Tag>
+        );
+      },
     },
     {
       title: "Phone no.",
@@ -104,6 +108,21 @@ const AddPartners = () => {
     getData();
   }, [selectedPost]);
 
+  // Fuzzy search functionality
+  const handleSearch = (searchValue) => {
+    const fuse = new Fuse(allPartners, { keys: ["name"], threshold: 0.3 });
+    const filteredPartners = searchValue
+      ? fuse.search(searchValue)
+      : allPartners;
+    setFilteredPartners(
+      filteredPartners.map((partner, index) => ({
+        ...partner.item,
+        index: index + 1,
+      }))
+    );
+    console.log(filteredPartners.length);
+  };
+
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
       <p className="font-semibold text-[#4A5568] text-xl p-2 pl-0">
@@ -115,50 +134,17 @@ const AddPartners = () => {
           <div className=" flex flex-col gap-1">
             <p className="text-[#718096] text-sm">Name</p>
             <div className="relative w-fit overflow-hidden">
-              <input
-                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
+              <Input
+                className="w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
                 type="text"
                 placeholder="Name"
-              />
-              <img
-                className="absolute top-[5px] right-1 text-xl h-8 cursor-pointer p-2"
-                src="search.png"
-                alt=""
+                onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
           </div>
 
-          <div className=" flex flex-col gap-1">
-            <p className="text-[#718096] text-sm">From Date</p>
-            <div className="relative w-fit overflow-hidden">
-              <input
-                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
-                type="text"
-                placeholder="Purchase Order No."
-              />
-              <img
-                className="absolute top-0 right-0 text-xl h-10 cursor-pointer"
-                src="/icons/Date.svg"
-                alt=""
-              />
-            </div>
-          </div>
+          {/* ... other filter sections ... */}
 
-          <div className=" flex flex-col gap-1">
-            <p className="text-[#718096] text-sm">To Date</p>
-            <div className="relative w-fit overflow-hidden">
-              <input
-                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
-                type="text"
-                placeholder="Purchase Order No."
-              />
-              <img
-                className="absolute top-0 right-0 text-xl h-10 cursor-pointer"
-                src="/icons/Date.svg"
-                alt=""
-              />
-            </div>
-          </div>
           <div className="flex flex-col gap-1">
             <p className="text-[#718096] text-sm">Type</p>
             <div className="w-fit overflow-hidden">
@@ -197,7 +183,6 @@ const AddPartners = () => {
           >
             + Add Seller
           </button>
-          {/* <Modala /> */}
           <CreateBuyer />
           <CreateSeller />
         </div>
@@ -205,7 +190,9 @@ const AddPartners = () => {
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
-            dataSource={allPartners}
+            dataSource={
+              filteredPartners?.length===allPartners?.length || filteredPartners.length===0 ? allPartners : filteredPartners
+            }
             columns={columns}
             scroll={{ x: 500 }}
           />
