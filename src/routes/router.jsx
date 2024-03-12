@@ -8,6 +8,7 @@ import AddPartners from "../pages/AddPartners";
 import AllMaterials from "../pages/AllMaterials";
 import AllMaterialRequest from "../pages/AllMaterialRequest.jsx";
 import AllPurchaseRequest from "../pages/AllPurchaseRequest.jsx";
+import MaterialRequestApproval from "../pages/approvals/MaterialRequestApproval.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,9 +40,13 @@ const router = createBrowserRouter([
         element: <AllMaterialRequest />,
       },
       {
-        path:"/allpurchaserequests",
-        element:<AllPurchaseRequest/>
-      }
+        path: "/allpurchaserequests",
+        element: <AllPurchaseRequest />,
+      },
+      {
+        path:"approval/materialrequest",
+        element:<MaterialRequestApproval/>
+      },
     ],
   },
   {
