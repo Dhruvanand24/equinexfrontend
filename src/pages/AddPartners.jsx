@@ -127,7 +127,7 @@ const AddPartners = () => {
   }, [selectedPost]);
 
  const handleSearch = () => {
-    const fuse = new Fuse(displayData, { keys: ["name"], threshold: 0.3 });
+    const fuse = new Fuse(displayData, { keys: ["name", "phone"], threshold: 0.3 });
     console.log(fuse);
     const filteredPartners = searchtext
       ? fuse.search(searchtext)
@@ -161,12 +161,12 @@ const AddPartners = () => {
       <div className="w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2">
         <div className="filtersection flex flex-wrap gap-[50px] p-4">
           <div className=" flex flex-col gap-1">
-            <p className="text-[#718096] text-sm">Name</p>
+            <p className="text-[#718096] text-sm">Name/Phone</p>
             <div className="relative w-fit overflow-hidden">
               <Input
-                className="w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
+                className=" w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-sm border-[#D9D9D9] border-[1px] px-4 py-2 cursor-text outline-blue-500"
                 type="text"
-                placeholder="Name"
+                placeholder="Name/Phone"
                 value={searchtext}
                 onChange={(e) => setSearchText(e.target.value)}
               />
