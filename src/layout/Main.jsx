@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 
 
 const Main = () => {
+  
   return (
       <div className='bg-background-0 font-roboto flex'>
         <Sidebar />
