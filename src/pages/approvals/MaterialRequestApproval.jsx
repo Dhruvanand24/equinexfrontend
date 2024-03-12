@@ -17,9 +17,9 @@ const MaterialRequestApproval = () => {
   // ];
 
   const [dataSource, setDataSouurce] = useState([]);
-  const [allDepartment,setAllDepartment] = useState([]);
-  const [allRequests,setAllRequests]=useState([]);
-  const [requestMaterial, setRequestMaterial]=useState([]);
+  const [allDepartment, setAllDepartment] = useState([]);
+  const [allRequests, setAllRequests] = useState([]);
+  const [requestMaterial, setRequestMaterial] = useState([]);
   const columns = [
     {
       title: "S.no",
@@ -61,20 +61,62 @@ const MaterialRequestApproval = () => {
     },
     {
       title: "Status",
-      dataIndex: "Status",
-      key: "Status",
+      key: "action",
+      render: (_, record) => (
+        <div>
+          {record.Status ? (
+            <span
+              className="p-2 w-fit bg-green-400 rounded-md cursor-pointer"
+              onClick={() => {
+                toggleStatus(record["MR ID"],record.Status);
+              }}
+            >
+              Approved
+            </span>
+          ) : (
+            <span
+              className="p-2 w-fit bg-red-400 rounded-md cursor-pointer"
+              onClick={() => {
+                toggleStatus(record["MR ID"],record.Status);
+              }}
+            >
+              pendding
+            </span>
+          )}
+        </div>
+      ),
     },
   ];
   const showMaterials = (_id) => {
     console.log(_id);
-    
-      const request = allRequests.find(
-        (item) => item._id === _id
-      );
-      console.log(request.List_of_materials);
-      setRequestMaterial(request.List_of_materials);
-      document.getElementById("show_material_modal").showModal();
+
+    const request = allRequests.find((item) => item._id === _id);
+    console.log(request.List_of_materials);
+    setRequestMaterial(request.List_of_materials);
+    document.getElementById("show_material_modal").showModal();
   };
+
+
+  const toggleStatus=async(_id, Status)=>{
+    console.log(_id, Status);
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/material/updatematerialrequest', {
+        _id,
+        Status:!Status
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      console.log(response);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
 
   const fetchdata = async () => {
     try {
@@ -102,15 +144,7 @@ const MaterialRequestApproval = () => {
           Department: department?.name,
           DOO: `${dateString.getDate()}-${dateString.getMonth()}-${dateString.getFullYear()}`,
 
-          Status: e?.Status_approval.isapproved ? (
-            <span className="p-2 w-fit bg-green-400 rounded-md cursor-pointer">
-              Approved
-            </span>
-          ) : (
-            <span className="p-2 w-fit bg-red-400 rounded-md cursor-pointer">
-              pendding
-            </span>
-          ),
+          Status: e?.Status_approval.isapproved,
         };
 
         // Corrected: Use array spread to append the new data object to the dataSource array
@@ -182,7 +216,7 @@ const MaterialRequestApproval = () => {
             </div>
           </div>
         </div>
-        <ShowMaterials data={requestMaterial}/>
+        <ShowMaterials data={requestMaterial} />
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
