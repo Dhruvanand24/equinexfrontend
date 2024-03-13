@@ -25,6 +25,45 @@ const ShowMaterials = (props) => {
     }
     
   }
+  const fetchdata = async () => {
+    setAllData([]);
+    console.log("hiii");
+    try {
+      props.data.forEach(async (e, index) => {
+        console.log(e)
+        const material = await axios.post(
+          "http://localhost:8000/api/v1/material/getmaterialbyid",
+          {
+            material_id: e.material_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log(material.data);
+
+        const data = {
+          "S.no": index + 1,
+          name: material.data.data.Name,
+          material_id: e?.material_id,
+          quantity: e.quantity,
+        };
+
+        console.log("data", data);
+
+        // Corrected: Use array spread to append the new data object to the dataSource array
+        setAllData((prevDataSource) => [...prevDataSource, data]);
+      });
+
+      console.log(allData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const Hold = async() => {
 
@@ -49,6 +88,8 @@ const ShowMaterials = (props) => {
   useEffect(() => {
     setAllData(props.data);
     setMrid(props.id);
+    fetchdata();
+    
   }, [props.data]);
 
   const columns = [
