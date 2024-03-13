@@ -10,7 +10,21 @@ const CreatePurchaseRequest = () => {
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+  useEffect(() => {
+    // Check if modal is closed
+    const modal = document.getElementById("create_new_purchase_request_modal");
+    if (modal) {
+      const closeListener = () => {
+        // Clear selected materials
+        setSelectedMaterials([]);
+        setIsOpen(false);
+      };
+      modal.addEventListener("close", closeListener);
+      return () => {
+        modal.removeEventListener("close", closeListener);
+      };
+    }
+  }, []);
   const columns = [
     {
       title: "S.no",
