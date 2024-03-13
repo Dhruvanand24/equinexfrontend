@@ -42,6 +42,10 @@ const ShowMaterials = (props) => {
             </h3>
             <hr />
             <Table columns={columns} dataSource={allData} />
+            <div className="flex justify-evenly mt-8">
+              <button className="bg-approved-0 text-approvedtext-0 bg-opacity-15 p-2 px-4 rounded-md">Approve</button>
+              <button className="bg-pending-0 text-pending-0 bg-opacity-15 p-2 px-4 rounded-md">Delete</button>
+            </div>
             <button
               htmlFor="show_material_modal"
               onClick={() =>
