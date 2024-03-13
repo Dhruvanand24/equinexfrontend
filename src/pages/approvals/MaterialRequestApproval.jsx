@@ -20,6 +20,7 @@ const MaterialRequestApproval = () => {
   const [allDepartment, setAllDepartment] = useState([]);
   const [allRequests, setAllRequests] = useState([]);
   const [requestMaterial, setRequestMaterial] = useState([]);
+  const [materialRequestId, setMaterialRequestId] = useState([]);
   const columns = [
     {
       title: "S.no",
@@ -75,18 +76,18 @@ const MaterialRequestApproval = () => {
           {record.Status ? (
             <span
               className="p-2 w-fit bg-approved-0 bg-opacity-15 font-semibold text-approvedtext-0 rounded-md cursor-pointer"
-              onClick={() => {
-                toggleStatus(record["MR ID"],record.Status);
-              }}
+              // onClick={() => {
+              //   toggleStatus(record["MR ID"],record.Status);
+              // }}
             >
               Approved
             </span>
           ) : (
             <span
               className="p-2 w-fit bg-pending-0 bg-opacity-15 text-pending-0 font-semibold rounded-md cursor-pointer"
-              onClick={() => {
-                toggleStatus(record["MR ID"],record.Status);
-              }}
+              // onClick={() => {
+              //   toggleStatus(record["MR ID"],record.Status);
+              // }}
             >
               pending
             </span>
@@ -101,6 +102,7 @@ const MaterialRequestApproval = () => {
     const request = allRequests.find((item) => item._id === _id);
     console.log(request.List_of_materials);
     setRequestMaterial(request.List_of_materials);
+    setMaterialRequestId(_id);
     document.getElementById("show_material_modal").showModal();
   };
 
@@ -224,7 +226,7 @@ const MaterialRequestApproval = () => {
             </div>
           </div>
         </div>
-        <ShowMaterials data={requestMaterial} />
+        <ShowMaterials data={requestMaterial} id={materialRequestId} />
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table

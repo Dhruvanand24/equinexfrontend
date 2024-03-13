@@ -1,11 +1,54 @@
 import { Table } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const ShowMaterials = (props) => {
   const [allData, setAllData] = useState([]);
-  
+  const [mrid, setMrid] = useState("");
+  console.log(props);
+  const Approve = async() => {
+    console.log(mrid);
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/material/updatematerialrequest', {
+       _id: mrid,
+        Status:true
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      console.log(response);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  const Hold = async() => {
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/material/updatematerialrequest', {
+        _id: mrid,
+        Status:false
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      console.log(response);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
   useEffect(() => {
     setAllData(props.data);
+    setMrid(props.id);
   }, [props.data]);
 
   const columns = [
@@ -43,7 +86,8 @@ const ShowMaterials = (props) => {
             <hr />
             <Table columns={columns} dataSource={allData} />
             <div className="flex justify-evenly mt-8">
-              <button className="bg-approved-0 text-approvedtext-0 bg-opacity-15 p-2 px-4 rounded-md">Approve</button>
+              <button onClick={Approve} className="bg-approved-0 text-approvedtext-0 bg-opacity-15 p-2 px-4 rounded-md">Approve</button>
+              <button onClick={Hold} className="bg-[#FFAE1F] text-[#FFAE1F] bg-opacity-15 p-2 px-4 rounded-md">Hold</button>
               <button className="bg-pending-0 text-pending-0 bg-opacity-15 p-2 px-4 rounded-md">Delete</button>
             </div>
             <button
