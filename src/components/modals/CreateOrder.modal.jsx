@@ -112,7 +112,7 @@ const CreateOrder = () => {
               e.preventDefault();
               submitForm();
             }}
-            className="flex flex-col h-full"
+            className="flex flex-col h-full w-full"
             method="dialog"
           >
             <h3 className="font-bold text-[18px] text-heading-0 mb-4">

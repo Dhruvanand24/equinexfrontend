@@ -154,10 +154,10 @@ const CreateMaterialRequest = () => {
       className="modal backdrop-blur-sm"
     >
       <div className="modal-box w-3/5 h-[80%] max-w-5xl flex flex-col items-center rounded-lg ">
-        <div className="modal-action h-full">
+        <div className="modal-action h-full w-full">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col h-full"
+            className="flex flex-col h-full w-full"
             method="dialog"
           >
             <h3 className="font-bold text-[18px] text-heading-0 mb-4">
@@ -200,12 +200,12 @@ const CreateMaterialRequest = () => {
 
                     <ul
                       tabIndex={0}
-                      className="mt-3 z-[1] p-2 shadow-sm bor ring-1 menu menu-sm dropdown-content bg-base-100 flex flex-col rounded-box gap-y-1 gap-x-2 w-60 h-[105px] overflow-auto "
+                      className="mt-3 z-[1] shadow-md menu menu-sm dropdown-content bg-base-100 flex flex-col  p-4 gap-y-1 gap-x-2 w-60 overflow-auto"
                     >
                       {allMaterials?.map((ele) => (
                         <div
                           key={ele._id}
-                          className="flex flex-row gap-2 w-full justify-between px-2 ring-1"
+                          className="flex gap-2 w-full justify-between px-2 "
                         >
                           <input
                             name="po"
