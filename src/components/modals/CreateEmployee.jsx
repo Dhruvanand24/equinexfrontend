@@ -20,7 +20,8 @@ const CreateEmployee = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const formData = { ...data, selectedPost, selectedPermissions };
+      const formData = { ...data, post:selectedPost, AccessPermission: selectedPermissions };
+      console.log(formData)
       const response = await axios.post(
         "http://localhost:8000/api/v1/users/register",
         formData,

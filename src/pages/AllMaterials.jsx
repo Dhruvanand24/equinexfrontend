@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Modal, Button } from "antd";
 import CreateMaterial from "../components/modals/CreateMaterial.modal";
+import axios from "axios";
 
 const AllMaterials = () => {
+  const [allMaterials, setAllMaterials] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dataSource = [];
   const columns = [
     {
@@ -10,6 +13,7 @@ const AllMaterials = () => {
       dataIndex: "S.no",
       key: "S.no",
       fixed: "left",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Name",
@@ -17,26 +21,36 @@ const AllMaterials = () => {
       key: "Name",
     },
     {
-      title: "Post",
-      dataIndex: "Post",
-      key: "Post",
+      title: "Material Id",
+      dataIndex: "_id",
+      key: "_id",
     },
     {
-      title: "Warehouse",
-      dataIndex: "Warehouse",
-      key: "Warehouse",
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-    },
-    {
-      title: "Edit",
+      title: "Action",
       dataIndex: "Edit",
       key: "Edit",
     },
   ];
+  
+
+  const fetchMaterials = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:8000/api/v1/material/getallmaterial");
+      setAllMaterials(response.data.data);
+    
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+      // Handle error gracefully, e.g., show error message to the user
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMaterials();
+    
+  }, []);
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
       <p className="font-semibold text-[#4A5568] text-xl p-2 pl-0">
@@ -79,7 +93,7 @@ const AllMaterials = () => {
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
-            dataSource={dataSource}
+            dataSource={allMaterials}
             columns={columns}
             scroll={{ x: 500 }}
           />
