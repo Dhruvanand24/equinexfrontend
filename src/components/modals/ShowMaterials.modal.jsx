@@ -29,7 +29,9 @@ const ShowMaterials = (props) => {
     setAllData([]);
     console.log("hiii");
     try {
-      props.data.forEach(async (e, index) => {
+      const fetchedData = [];
+      // Using Promise.all to wait for all async operations to complete
+      await Promise.all(props.data.map(async (e, index) => {
         console.log(e)
         const material = await axios.post(
           "http://localhost:8000/api/v1/material/getmaterialbyid",
@@ -42,26 +44,31 @@ const ShowMaterials = (props) => {
             },
           }
         );
-
+  
         console.log(material.data);
-
+  
         const data = {
           "S.no": index + 1,
           name: material.data.data.Name,
           material_id: e?.material_id,
           quantity: e.quantity,
         };
-
+  
         console.log("data", data);
-
-        // Corrected: Use array spread to append the new data object to the dataSource array
-        setAllData((prevDataSource) => [...prevDataSource, data]);
-      });
-
-      console.log(allData);
+  
+        fetchedData.push(data);
+      }));
+  
+      // Sort fetchedData array based on the "S.no" index
+      fetchedData.sort((a, b) => a["S.no"] - b["S.no"]);
+  
+      console.log(fetchedData);
+  
+      // Update allData with the sorted fetchedData
+      setAllData(fetchedData);
     } catch (error) {
       console.log(error);
-    }
+    }
   };
 
 
@@ -89,6 +96,7 @@ const ShowMaterials = (props) => {
     setAllData(props.data);
     setMrid(props.id);
     fetchdata();
+
     
   }, [props.data]);
 
@@ -126,7 +134,7 @@ const ShowMaterials = (props) => {
             </h3>
             <hr />
             <Table columns={columns} dataSource={allData} />
-            <div className="flex justify-evenly mt-8">
+            <div className="flex justify-evenly mt-8 mb-4">
               <button onClick={Approve} className="bg-approved-0 text-approvedtext-0 bg-opacity-15 p-2 px-4 rounded-md">Approve</button>
               <button onClick={Hold} className="bg-[#FFAE1F] text-[#FFAE1F] bg-opacity-15 p-2 px-4 rounded-md">Hold</button>
               <button className="bg-pending-0 text-pending-0 bg-opacity-15 p-2 px-4 rounded-md">Delete</button>
