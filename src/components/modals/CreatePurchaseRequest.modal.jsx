@@ -43,6 +43,10 @@ const CreatePurchaseRequest = () => {
   ];
 
   const onSubmit = async () => {
+    if (!document.getElementById("create_new_purchase_request_modal").open) {
+      // The modal is closed, do not submit the form
+      return;
+    }
     setLoading(true);
     try {
       const data = {
