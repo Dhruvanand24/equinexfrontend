@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Table, Modal, Button } from "antd";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import ShowMaterials from "../../components/modals/ShowMaterials.modal";
 
 const MaterialRequestStockCheck = () => {
     const [dataSource, setDataSource] = useState([]);
@@ -53,17 +55,19 @@ const MaterialRequestStockCheck = () => {
       ),
     },
     {
-      title: "Cehck inventory",
+      title: "Check inventory",
       type: "action",
-      render: (_, record) => {
-        <Link to={`/store/stockcheck/${record['MR ID']}`}><span
-          className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
-        >
-          Check
-        </span>
+      render: (_, record) => (
+        <Link to={`/store/stockcheck/${record['MR ID']}`}>
+          <span
+            className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
+          >
+            Check
+          </span>
         </Link>
-      },
-    },
+      ),
+    }
+    
   ];
 
   const showMaterials = (_id) => {
@@ -101,8 +105,9 @@ const MaterialRequestStockCheck = () => {
           "MR ID": e?._id,
           Department: department?.name,
           DOR: `${dateString.getDate()}-${dateString.getMonth()}-${dateString.getFullYear()}`,
-
+          "Approved By" : e?.Status_approval.approved_by,
           Status: e?.Status_approval.isapproved,
+        
         };
 
         // Corrected: Use array spread to append the new data object to the dataSource array
@@ -182,7 +187,7 @@ const MaterialRequestStockCheck = () => {
             Search
           </button>
         </div>
-
+        <ShowMaterials data={requestMaterial} id={materialRequestId} />
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
