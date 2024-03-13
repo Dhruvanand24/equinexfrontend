@@ -125,14 +125,19 @@ const MaterialRequestApproval = () => {
   }, []);
 
   const handleSearch = () => {
-    console.log(searchtext);
-    const fuse = new Fuse(displayData, { keys: ["OrderId", "MR ID"], threshold: 0.3 });
-    const filteredData = searchtext ? fuse.search(searchtext).map(result => result.item) : allRequests;
+    const fuse = new Fuse(dataSource, { keys: ["OrderId", "MR ID"], threshold: 0.3 });
+    const filteredData = searchtext ? fuse.search(searchtext).map(result => result.item) : dataSource;
     setDisplayData(filteredData);
   };
 
   useEffect(() => {
-    handleSearch();
+    // Trigger search only when searchtext is not empty
+    if (searchtext !== '') {
+      handleSearch();
+    } else {
+      // Set displayData back to original dataSource when searchtext is empty
+      setDisplayData(dataSource);
+    }
   }, [searchtext]);
 
   const showMaterials = (_id) => {
