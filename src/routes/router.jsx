@@ -9,6 +9,7 @@ import AllMaterials from "../pages/AllMaterials";
 import AllMaterialRequest from "../pages/AllMaterialRequest.jsx";
 import AllPurchaseRequest from "../pages/AllPurchaseRequest.jsx";
 import MaterialRequestApproval from "../pages/approvals/MaterialRequestApproval.jsx";
+import MaterialRequestStockCheck from "../pages/store/MaterialRequestStockCheck.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,9 +45,13 @@ const router = createBrowserRouter([
         element: <AllPurchaseRequest />,
       },
       {
-        path:"approval/materialrequest",
+        path:"/approval/materialrequest",
         element:<MaterialRequestApproval/>
       },
+      {
+        path:"/store/materialrequeststockcheck",
+        element:<MaterialRequestStockCheck/>
+      }
     ],
   },
   {
