@@ -11,6 +11,7 @@ import AllPurchaseRequest from "../pages/AllPurchaseRequest.jsx";
 import MaterialRequestApproval from "../pages/approvals/MaterialRequestApproval.jsx";
 import AllWarehouse from "../pages/AllWarehouses.jsx";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
