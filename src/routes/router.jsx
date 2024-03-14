@@ -11,7 +11,7 @@ import AllPurchaseRequest from "../pages/AllPurchaseRequest.jsx";
 import MaterialRequestApproval from "../pages/approvals/MaterialRequestApproval.jsx";
 import MaterialRequestStockCheck from "../pages/store/MaterialRequestStockCheck.jsx";
 import CompareInventory from "../pages/store/CompareInventory.jsx";
-
+import AllWarehouse from "../pages/AllWarehouses.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +48,10 @@ const router = createBrowserRouter([
       {
         path:"approval/materialrequest",
         element:<MaterialRequestApproval/>
+      },
+      {
+        path:"allwarehouse",
+        element:<AllWarehouse/>
       },
       {
         path:"/store/materialrequeststockcheck",
