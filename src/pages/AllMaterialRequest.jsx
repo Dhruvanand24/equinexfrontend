@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Modal, Button } from "antd";
 import CreateMaterialRequest from "../components/modals/CreateMaterialRequest.modal";
+import axios from "axios";
+import AllMaterials from "./AllMaterials";
+import useGetUser from "../hooks/useGetUser";
+import useUserDetails from "../hooks/useUserDetails";
 
 const AllMaterialRequest = () => {
+  
+  
+  const [allMaterialRequest, setAllMaterialRequest] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dataSource = [];
   const columns = [
     {
@@ -10,33 +18,83 @@ const AllMaterialRequest = () => {
       dataIndex: "S.no",
       key: "S.no",
       fixed: "left",
+      render: (text, record, index) => index + 1,
     },
     {
-      title: "Name",
-      dataIndex: "Name",
-      key: "Name",
+      title: "Date",
+      dataIndex: "Date_of_request",
+      key: "Date_of_request",
+      render: (text, record) =>(
+       <p> {
+        `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+        }</p>
+      )
     },
     {
-      title: "Post",
-      dataIndex: "Post",
-      key: "Post",
-    },
-    {
-      title: "Warehouse",
-      dataIndex: "Warehouse",
-      key: "Warehouse",
+      title: "ID",
+      dataIndex: "_id",
+      key: "_id",
     },
     {
       title: "Status",
-      dataIndex: "Status",
-      key: "Status",
+      dataIndex: "Status_approval",
+      key: "Status_approval",
+      render: (Status_approval, record) => (
+        <div>
+          {Status_approval.isapproved ? (
+            <span className="p-2 w-fit bg-approved-0 bg-opacity-15 font-semibold text-approvedtext-0 rounded-md cursor-pointer">
+              Approved
+            </span>
+          ) : (
+            <span className="p-2 w-fit bg-pending-0 bg-opacity-15 text-pending-0 font-semibold rounded-md cursor-pointer">
+              Pending
+            </span>
+          )}
+        </div>
+      ),
     },
     {
-      title: "Edit",
-      dataIndex: "Edit",
-      key: "Edit",
+      title: "Approved By",
+      dataIndex: "Status_approval",
+      key: "Status_approval",
+      render: (Status_approval, record) => (
+  
+        <div>
+         {  
+            Status_approval.approved_by_name
+         }
+        </div>
+      ),
+    },
+    {
+      title: "Action",
+      dataIndex: "Action",
+      key: "Action",
+      render: (_, record) => (
+        <Button onClick={() => handleEdit(record)}>Edit</Button>
+      ),
     },
   ];
+  
+  const fetchMaterialRequest = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:8000/api/v1/material/getallmaterialrequest");
+      setAllMaterialRequest(response.data.data);
+      console.log(allMaterialRequest);
+      
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+      // Handle error gracefully, e.g., show error message to the user
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMaterialRequest();
+    
+  }, []);
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
       <p className="font-semibold text-[#4A5568] text-xl p-2 pl-0">
@@ -113,7 +171,7 @@ const AllMaterialRequest = () => {
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
-            dataSource={dataSource}
+            dataSource={allMaterialRequest}
             columns={columns}
             scroll={{ x: 500 }}
           />
