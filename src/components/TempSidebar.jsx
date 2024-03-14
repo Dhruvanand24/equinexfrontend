@@ -82,7 +82,7 @@ const TempSidebar = () => {
        <Link to="/allmaterialrequests"> <SidebarOption title="/allmaterialrequests" icon="/sidebaricon.png" link="#" /></Link>
         <Link to="/allpurchaserequests"><SidebarOption title="/allpurchaserequests" icon="/sidebaricon.png" link="#" /></Link>
         <Link to="/approval/materialrequest"><SidebarOption title="/approval/materialrequest" icon="/sidebaricon.png" link="#" /></Link>
-        <SidebarOption title="Reports" icon="/sidebaricon.png" link="#" />
+        <Link to="/allwarehouse"><SidebarOption title="/allwarehouse" icon="/sidebaricon.png" link="#" /></Link>
         <SidebarOption title="Integration" icon="/sidebaricon.png" link="#" />
         <Link to="/allemployees"><SidebarOption title="/allEmployees" icon="/sidebaricon.png" link="/allemployees" submenuOptions={submenuOptionsSettings} /></Link>
       </div>

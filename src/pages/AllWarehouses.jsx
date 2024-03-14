@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Modal, Button } from 'antd'
 import CreateWarehouse from '../components/modals/CreateWarehouse';
+import axios from 'axios';
 
 
 
@@ -9,45 +10,42 @@ import CreateWarehouse from '../components/modals/CreateWarehouse';
 
 
 const AllWarehouse = () => {
-
+const [dataSource, setDataSource] = useState([])
  
+const fetch = async() => {
+  try {
+    const response = await axios.get("http://localhost:8000/api/v1/warehouse/getallwarehouse")
+    setDataSource(response.data.data);
+    console.log(response)
+  
+  } catch (error) {
+    console.log(error)
+  }}
 
-  const dataSource = [
-   
-  ];
+
+
   const columns = [
     {
       title: 'S.no',
       dataIndex: 'S.no',
       key: 'S.no',
       fixed: 'left',
+      render: (text, record, index) => index + 1,
     },
     {
       title: 'Name',
-      dataIndex: 'Name',
-      key: 'Name',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: 'Post',
-      dataIndex: 'Post',
-      key: 'Post',
-    },
-    {
-      title: 'Warehouse',
-      dataIndex: 'Warehouse',
-      key: 'Warehouse',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'Status',
-      key: 'Status',
-    },
-    {
-      title: 'Edit',
-      dataIndex: 'Edit',
-      key: 'Edit',
+      title: 'Manager',
+      dataIndex: 'manager',
+      key: 'manager',
     }
   ];
+  useEffect(()=> {
+    fetch();
+  }, [])
   return (
     <div className='bg-white p-4 w-full flex flex-col justify-start items-start h-full'>
       <p className='font-semibold text-[#4A5568] text-xl p-2 pl-0'>All Warehouses</p>

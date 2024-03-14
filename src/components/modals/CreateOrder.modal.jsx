@@ -125,7 +125,7 @@ const CreateOrder = () => {
                 <div className="w-fit overflow-hidden">
                   <select
                     onChange={(e) => {
-                      setOrderBy(e.target.value);
+                      setOrderBy(e.target.value);    
                     }}
                     value={orderBy}
                     className="text-[14px] h-[42px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-md border-ring-0 border-[1px] px-4  cursor-text outline-blue-500"

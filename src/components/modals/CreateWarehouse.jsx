@@ -21,7 +21,7 @@ const CreateWarehouse = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/buyer/createwarehouse", data ,{
+      const response = await axios.post("http://localhost:8000/api/v1/warehouse/createwarehouse", data ,{
          headers: {
           "Content-Type": "application/json",
          }
@@ -67,7 +67,7 @@ const CreateWarehouse = () => {
                     className="text-[14px] w-[256px] bg-[#edf1fa] text-[#8792A4] rounded-lg border-ring-0 border-[1px] px-4 py-[8px] cursor-text outline-blue-500"
                     type="text"
                     placeholder="Manager"
-                    {...register("address", { required: true })}
+                    {...register("manager", { required: true })}
                   />
                 </div>
               </div>
