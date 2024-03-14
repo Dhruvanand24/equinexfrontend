@@ -21,6 +21,16 @@ const AllMaterialRequest = () => {
       render: (text, record, index) => index + 1,
     },
     {
+      title: "Date",
+      dataIndex: "Date_of_request",
+      key: "Date_of_request",
+      render: (text, record) =>(
+       <p> {
+        `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+        }</p>
+      )
+    },
+    {
       title: "ID",
       dataIndex: "_id",
       key: "_id",
@@ -51,7 +61,7 @@ const AllMaterialRequest = () => {
   
         <div>
          {  
-            
+            Status_approval.approved_by_name
          }
         </div>
       ),
