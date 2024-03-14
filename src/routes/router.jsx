@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         element: <AllPurchaseRequest />,
       },
       {
-        path:"/approval/materialrequest",
+        path:"approval/materialrequest",
         element:<MaterialRequestApproval/>
       },
       {
