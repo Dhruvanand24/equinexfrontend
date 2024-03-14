@@ -77,11 +77,7 @@ const AddEmployee = () => {
         </div>
       ),
     },
-    {
-      title: 'Edit',
-      dataIndex: 'Edit',
-      key: 'Edit',
-    }
+    
   ];
 
   return (
