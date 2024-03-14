@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <MaterialRequestStockCheck />
       },
       {
-        path: "/store/stockcheck:id",
+        path: "/store/stockcheck/:id",
         element: <CompareInventory />
       }
     ],
