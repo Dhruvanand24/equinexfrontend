@@ -106,7 +106,7 @@ const CompareInventory = () => {
           "Material ID": e?.material_id,
           "Material Name": material?.data.data.Name,
           Quantity: e?.quantity,
-          StockStatus: true,
+          StockStatus: false,
         };
         console.log(data);
         fetchedData.push(data);
