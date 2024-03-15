@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Table, Modal, Button } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ShowMaterials from "../../components/modals/ShowMaterials.modal";
 
 const MaterialRequestStockCheck = () => {
     const [dataSource, setDataSource] = useState([]);
@@ -42,18 +41,7 @@ const MaterialRequestStockCheck = () => {
       dataIndex: "DOR",
       key: "DOR",
     },
-    {
-      title: "List Of Materials",
-      type: "action",
-      render: (_, record) => (
-        <span
-          className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
-          onClick={() => showMaterials(record["MR ID"])}
-        >
-          View
-        </span>
-      ),
-    },
+   
     {
       title: "Check inventory",
       type: "action",
@@ -187,7 +175,6 @@ const MaterialRequestStockCheck = () => {
             Search
           </button>
         </div>
-        <ShowMaterials data={requestMaterial} id={materialRequestId} />
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table

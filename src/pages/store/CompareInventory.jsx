@@ -8,12 +8,12 @@ const CompareInventory = () => {
   const { id } = useParams();
   console.log(id);
   const [dataSource, setDataSource] = useState([]);
-  const [material_id,setMaterial_id]=useState(null);
-  const showWarehouseStockModal= (Material_id)=>{
-    console.log(Material_id);
-    setMaterial_id(Material_id);
-    document.getElementById('create_warehouse_request_modal').showModal();
-  }
+  const [material_Data, setMaterialData] = useState({});
+  const showWarehouseStockModal = (Material_Data) => {
+    console.log(Material_Data);
+    setMaterialData(Material_Data);
+    document.getElementById("create_warehouse_request_modal").showModal();
+  };
   const columns = [
     {
       title: "S.no",
@@ -41,13 +41,12 @@ const CompareInventory = () => {
       type: "action",
       render: (_, record) =>
         record.StockStatus ? (
-          <span className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold  text-primary-0 rounded-md">
-           
-            In Stock
+          <span className="p-2 px-4 w-fit  font-semibold  text-primary-0 rounded-md">
+            {record.StockQuantity}
           </span>
         ) : (
-          <span className="p-2 px-4 w-fit bg-red-400 bg-opacity-15 font-semibold  text-red-600 rounded-md">
-            No Stock
+          <span className="p-2 px-4 w-fit  font-semibold  text-red-600 rounded-md">
+            {record.StockQuantity}
           </span>
         ),
     },
@@ -59,7 +58,7 @@ const CompareInventory = () => {
         record.StockStatus ? (
           <span
             className="p-2 px-4 w-fit bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
-            onClick={() => showWarehouseStockModal(record["Material ID"])}
+            onClick={() => showWarehouseStockModal(record)}
           >
             View
           </span>
@@ -87,41 +86,57 @@ const CompareInventory = () => {
       console.log(materialrequest.data.data);
       const requestdata = materialrequest.data.data;
       const fetchedData = [];
-      await Promise.all(requestdata?.List_of_materials.map(async (e, index) => {
-        const material = await axios.post(
-          "http://localhost:8000/api/v1/material/getmaterialbyid",
-          {
-            material_id: e.material_id,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
+      await Promise.all(
+        requestdata?.List_of_materials.map(async (e, index) => {
+          const material = await axios.post(
+            "http://localhost:8000/api/v1/material/getmaterialbyid",
+            {
+              material_id: e.material_id,
             },
-          }
-        );
-  
-        console.log(material.data.data);
-        const data = {
-          "S.no": index + 1,
-          "Material ID": e?.material_id,
-          "Material Name": material?.data.data.Name,
-          Quantity: e?.quantity,
-          StockStatus: false,
-        };
-        console.log(data);
-        fetchedData.push(data);
-      }));
-  
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          console.log(material.data.data);
+
+          const material_inventory = await axios.post(
+            "http://localhost:8000/api/v1/inventory/getmaterialinventorybyid",
+            {
+              id: e.material_id,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log("inventory material", material_inventory.data.data)
+          const data = {
+            "S.no": index + 1,
+            "Material ID": e?.material_id,
+            "Material Name": material?.data.data.Name,
+            Quantity: e?.quantity,
+            StockQuantity:material_inventory.data.data.quantity,
+            StockStatus: e.quantity<=material_inventory.data.data.quantity,
+            warehouse:material_inventory.data.data.warehouse
+          };
+          console.log(data);
+          fetchedData.push(data);
+        })
+      );
+
       // Sort fetchedData array based on the "S.no" index
       fetchedData.sort((a, b) => a["S.no"] - b["S.no"]);
-  
+
       // Update dataSource with the sorted fetchedData
       setDataSource(fetchedData);
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   useEffect(() => {
     fetchdata();
@@ -133,9 +148,9 @@ const CompareInventory = () => {
       </p>
       <div className="w-full h-full border-[#D9D9D9] rounded-[4px] border-[1px] p-2">
         <hr className="bg-blue-500 h-1 mt-4" />
-        <WarehouseRequest id={material_id}/>
+        <WarehouseRequest data={material_Data} />
         <div className="max-w-full">
-          <Table 
+          <Table
             dataSource={dataSource}
             columns={columns}
             scroll={{ x: 500 }}
