@@ -36,6 +36,11 @@ const AddEmployee = () => {
       render: (text, record, index) => index + 1,
     },
     {
+      title: 'ID',
+      dataIndex: '_id',
+      key: '_id',
+    },
+    {
       title: 'Name',
       dataIndex: 'fullName',
       key: 'fullName',

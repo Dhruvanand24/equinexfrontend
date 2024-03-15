@@ -33,6 +33,11 @@ const fetch = async() => {
       render: (text, record, index) => index + 1,
     },
     {
+      title: 'ID',
+      dataIndex: '_id',
+      key: '_id',
+    },
+    {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',

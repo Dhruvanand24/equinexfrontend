@@ -26,7 +26,7 @@ const AllMaterialRequest = () => {
       key: "Date_of_request",
       render: (text, record) =>(
        <p> {
-        `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+        `${new Date(text).getDate()}-${new Date(text).getMonth()+1}-${new Date(text).getFullYear()}`
         }</p>
       )
     },

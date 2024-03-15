@@ -1,41 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Modal, Button } from "antd";
 import CreatePurchaseRequest from "../components/modals/CreatePurchaseRequest.modal";
+import axios from "axios";
 
 const AllPurchaseRequest = () => {
-  const dataSource = [];
+
+const [allPurchaseRequests, setAllPurchaseRequests] = useState([])
+
+const fetch = async() => {
+  try {
+    const response = await axios.get("http://localhost:8000/api/v1/purchase/GetAllPurchaseOrder")
+    setAllPurchaseRequests(response.data.data);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+useEffect(()=> {
+  fetch()
+},[])
+
+  
   const columns = [
     {
       title: "S.no",
       dataIndex: "S.no",
       key: "S.no",
       fixed: "left",
+      render: (text, record, index) => index + 1,
     },
     {
-      title: "Name",
-      dataIndex: "Name",
-      key: "Name",
+      title: "ID",
+      dataIndex: "_id",
+      key: "_id",
     },
     {
-      title: "Post",
-      dataIndex: "Post",
-      key: "Post",
+      title: "Date",
+      dataIndex: "Date_of_request",
+      key: "Date_of_request",
+      render: (text, record) =>(
+        <p> {
+         `${new Date(text).getDate()}-${new Date(text).getMonth()+1}-${new Date(text).getFullYear()}`
+         }</p>
+       )
     },
     {
-      title: "Warehouse",
-      dataIndex: "Warehouse",
-      key: "Warehouse",
+      title: "Requester ID",
+      dataIndex: "Requester",
+      key: "Requester",
     },
+  
     {
       title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-    },
-    {
-      title: "Edit",
-      dataIndex: "Edit",
-      key: "Edit",
-    },
+      dataIndex: "isApproved",
+      key: "isApproved",
+      render: (isApproved, record) => (
+        <div>
+          {isApproved ? (
+            <span className="p-2 w-fit bg-approved-0 bg-opacity-15 font-semibold text-approvedtext-0 rounded-md cursor-pointer">
+              Approved
+            </span>
+          ) : (
+            <span className="p-2 w-fit bg-pending-0 bg-opacity-15 text-pending-0 font-semibold rounded-md cursor-pointer">
+              Pending
+            </span>
+          )}
+        </div>
+      ),
+    }
   ];
   return (
     <div className="bg-white p-4 w-full flex flex-col justify-start items-start h-full">
@@ -113,7 +145,7 @@ const AllPurchaseRequest = () => {
         <hr className="bg-blue-500 h-1 mt-4" />
         <div className="max-w-full">
           <Table
-            dataSource={dataSource}
+            dataSource={allPurchaseRequests}
             columns={columns}
             scroll={{ x: 500 }}
           />

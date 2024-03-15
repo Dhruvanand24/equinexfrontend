@@ -251,7 +251,7 @@ const OrderList = () => {
       key: "Date_of_Order",
       render: (text, record) =>(
         <p> {
-         `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+         `${new Date(text).getDate()}-${new Date(text).getMonth()+1}-${new Date(text).getFullYear()}`
          }</p>
        )
     },
@@ -281,7 +281,7 @@ const OrderList = () => {
       key: "Deadline",
       render: (text, record) =>(
         <p> {
-         `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+         `${new Date(text).getDate()}-${new Date(text).getMonth()+1}-${new Date(text).getFullYear()}`
          }</p>
        )
     },
@@ -291,7 +291,7 @@ const OrderList = () => {
       key: "Date_of_Delivery",
       render: (text, record) =>(
         <p> {
-         `${new Date(text).getDate()}-${new Date(text).getMonth()}-${new Date(text).getFullYear()}`
+         `${new Date(text).getDate()}-${new Date(text).getMonth()+1}-${new Date(text).getFullYear()}`
          }</p>
        )
     },

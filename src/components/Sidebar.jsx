@@ -8,11 +8,11 @@ const Submenu = ({ isOpen, heading, submenuOptions }) => {
       <div className="px-4 bg-background-0 font-semibold py-4">{heading}</div>
 
       {/* Dynamic submenu options */}
-      <div className="px-4 py-2 text-sidebar-0 font-semibold">Pages</div>
+      
       {submenuOptions?.map((option, index) => (
-        <div key={index} className="pl-8 hover:bg-background-0 p-1 text-sidebar-0 font-normal">
-          <Link to={option.link}>{option.title}</Link>
-        </div>
+        <Link to={option.link}><div key={index} className="pl-8 text-[14px] hover:bg-background-0 p-1 text-sidebar-0 font-normal">
+          {option.title}
+        </div></Link>
       ))}
     </div>
   ) : null;
@@ -45,9 +45,22 @@ const Sidebar = () => {
   };
 
   const submenuOptionsAllPartners = [
-    { title: "Buyers", link: "/buyers" },
-    { title: "Suppliers", link: "/suppliers" },
-    { title: "Employees", link: "/employees" },
+    { title: "Buyers & Suppliers", link: "/allpartners" },
+    { title: "Employees", link: "/allemployees" },
+  ];
+
+  const submenuOptionsInventory = [
+    {title : "All Warehouses", link: "/allwarehouse"}
+  ]
+
+  const submenuOptionsMaterial = [
+    {title: "All Materials", link: "/allmaterials"},
+    { title: "Material Requests", link: "/allmaterialrequests"},
+    { title: "MR Approval", link: "approval/materialrequest"},
+    {title: "Stock Check", link: "/store/materialrequeststorecheck"},
+    {title: "Purchase Request", link: "/allpurchaserequests"},
+    {title: "PR Approval"}
+    
   ];
 
   const submenuOptionsSettings = [
@@ -76,10 +89,10 @@ const Sidebar = () => {
       </div>
       <div className="flex flex-col px-0 mt-8 text-sidebar-0 text-[16px] font-[500]">
         <SidebarOption title="Dashboard" icon="/sidebaricon.png" link="#" />
-        <SidebarOption title="Inventory" icon="/sidebaricon.png" link="#" />
-        <SidebarOption title="Sales & Purchase" icon="/sidebaricon.png" link="#" />
+        <SidebarOption title="Inventory" icon="/sidebaricon.png" link="#" submenuOptions={submenuOptionsInventory} />
+       <Link to="/allmaterials"> <SidebarOption title="Material" icon="/sidebaricon.png" link="#" submenuOptions={submenuOptionsMaterial} /></Link>
        <Link to="/allpartners"> <SidebarOption title="Partners" icon="/sidebaricon.png" submenuOptions={submenuOptionsAllPartners} /></Link>
-        <SidebarOption title="Transport" icon="/sidebaricon.png" link="#" />
+        <Link to="/orderlist"><SidebarOption title="Orders" icon="/sidebaricon.png" link="#" /></Link>
         <SidebarOption title="Production" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Expenses" icon="/sidebaricon.png" link="#" />
         <SidebarOption title="Reports" icon="/sidebaricon.png" link="#" />
