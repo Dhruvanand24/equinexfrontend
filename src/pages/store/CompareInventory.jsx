@@ -14,6 +14,55 @@ const CompareInventory = () => {
     setMaterialData(Material_Data);
     document.getElementById("create_warehouse_request_modal").showModal();
   };
+  const updateRecordInTableData = (updatedRecord) => {
+    setDataSource((prevData) => {
+      // Find the index of the record to update
+      const index = prevData.findIndex(
+        (record) => record["S.no"] === updatedRecord["S.no"]
+      );
+      if (index !== -1) {
+        // Create a new array with the updated record
+        const newData = [...prevData];
+        newData[index] = updatedRecord;
+        return newData;
+      }
+      return prevData;
+    });
+  };
+  const CreatePurchaseRequest = async (datas) => {
+    console.log(datas);
+    
+    try {
+      const data = {
+        List_of_materials: [{ material_id: datas["Material ID"], quantity: datas.Quantity }],
+      };
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/purchase/createpurchaserequest",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response);
+      setTimeout(() => {
+        alert(response.data.message);
+      }, 500);
+      const updatedRecord = { ...datas, pr: !datas.pr };
+       updateRecordInTableData(updatedRecord);
+      
+    } catch (error) {
+      
+      console.log("failed", error);
+      setTimeout(() => {
+        alert(error.response.data.message);
+      }, 500);
+    }
+  };
+
+  
   const columns = [
     {
       title: "S.no",
@@ -62,9 +111,16 @@ const CompareInventory = () => {
           >
             View
           </span>
+        ) : record.pr ? (
+          <span
+            className="p-2 px-4 w-fit flex flex-nowrap bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer"
+            onClick={() => CreatePurchaseRequest(record)}
+          >
+            PR request
+          </span>
         ) : (
           <span className="p-2 px-4 w-fit flex flex-nowrap bg-primary-0 bg-opacity-15 font-semibold hover:bg-opacity-30 text-primary-0 rounded-md cursor-pointer">
-            Add to Cart
+            PR Done
           </span>
         ),
     },
@@ -113,15 +169,16 @@ const CompareInventory = () => {
               },
             }
           );
-          console.log("inventory material", material_inventory.data.data)
+          console.log("inventory material", material_inventory.data.data);
           const data = {
             "S.no": index + 1,
             "Material ID": e?.material_id,
             "Material Name": material?.data.data.Name,
             Quantity: e?.quantity,
-            StockQuantity:material_inventory.data.data.quantity,
-            StockStatus: e.quantity<=material_inventory.data.data.quantity,
-            warehouse:material_inventory.data.data.warehouse
+            StockQuantity: material_inventory.data.data.quantity,
+            StockStatus: e.quantity <= material_inventory.data.data.quantity,
+            warehouse: material_inventory.data.data.warehouse,
+            pr: true,
           };
           console.log(data);
           fetchedData.push(data);
