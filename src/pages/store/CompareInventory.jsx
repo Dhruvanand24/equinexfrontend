@@ -144,6 +144,7 @@ const CompareInventory = () => {
       const fetchedData = [];
       await Promise.all(
         requestdata?.List_of_materials.map(async (e, index) => {
+          console.log(e);
           const material = await axios.post(
             "http://localhost:8000/api/v1/material/getmaterialbyid",
             {

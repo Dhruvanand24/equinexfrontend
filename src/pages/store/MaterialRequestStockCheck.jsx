@@ -82,6 +82,7 @@ const MaterialRequestStockCheck = () => {
       console.log(alldepartments);
       setAllDepartment(alldepartments);
       allmaterialrequests.forEach((e, index) => {
+        console.log(e);
         const dateString = new Date(e?.Date_of_request);
         const department = alldepartments.find(
           (item) => item._id === e?.Department_request_raise

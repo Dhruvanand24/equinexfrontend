@@ -59,7 +59,7 @@ const Sidebar = () => {
     { title: "MR Approval", link: "approval/materialrequest"},
     {title: "Stock Check", link: "/store/materialrequeststorecheck"},
     {title: "Purchase Request", link: "/allpurchaserequests"},
-    {title: "PR Approval"}
+    {title: "PR Approval", link: "/approval/pruchaserequest"}
     
   ];
 
