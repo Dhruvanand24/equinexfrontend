@@ -9,7 +9,7 @@ const [allPurchaseRequests, setAllPurchaseRequests] = useState([])
 
 const fetch = async() => {
   try {
-    const response = await axios.get("http://localhost:8000/api/v1/purchase/GetAllPurchaseOrder")
+    const response = await axios.get("http://localhost:8000/api/v1/purchase/getallpurchaserequest")
     setAllPurchaseRequests(response.data.data);
   } catch (error) {
     console.log(error)
